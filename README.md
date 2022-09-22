@@ -1,5 +1,8 @@
 # SWP391_SE1630-NET_Group1
 
+Đây là project của nhóm 1, tên là Glass King (working title)
+Code của nhóm ta để ở thư mục ```Source Code```
+Document mọi người có thể xem ở trong thư mục ```Document```.
 mọi người sử dụng git ghi nhớ các câu lệnh:
 
 - lấy code lần đầu: 
