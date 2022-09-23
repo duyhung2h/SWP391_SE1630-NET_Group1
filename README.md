@@ -8,7 +8,7 @@ Document mọi người có thể xem ở trong thư mục ```Document```.
 
 # Ghi chú
 
-Trước khi bắn code lên (git push), mọi người lưu ý pull code về trước nhé. Xong rồi chạy thử project của mình xem có lỗi hay conflict không. Xong rồi mà ko còn vấn đề gì nữa, thì thông báo cho nhóm qua chat. Nếu nhóm thấy ko có vấn đề gì thì ok, bắn lên nhé.
+Trước khi bắn code lên (git push), mọi người lưu ý pull code về trước nhé. Xong rồi chạy thử project của mình xem có lỗi hay conflict không. Xong rồi mà ko còn vấn đề gì nữa, thì thông báo cho nhóm qua chat (ghi lại là mình đã thay đổi những gì). Nếu nhóm thấy ko có vấn đề gì thì ok, bắn lên nhé.
 
 # Sử dụng Git
 
