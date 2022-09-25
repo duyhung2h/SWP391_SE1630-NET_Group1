@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="Nhom1_SWP" default="default" basedir=".">
-    <description>Builds, tests, and runs the project Nhom1_SWP.</description>
+<project name="Glass_Store_Source_Code" default="default" basedir=".">
+    <description>Builds, tests, and runs the project Glass Store Source Code.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
