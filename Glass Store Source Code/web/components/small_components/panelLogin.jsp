@@ -3,12 +3,12 @@
     Created on : Sep 30, 2022, 4:58:53 PM
     Author     : Admin
 --%>
-<form class="form-signin" id="login-form" action="login" method="post">
+<form class="form-signin" id="login-form" action="/login" method="post">
     <br><br><br><br>
     <h1 class="h3 mb-3 font-weight-normal" style="text-align: center; font-family: Brush Script Std"> Sign in</h1>
     <p class="text-danger">${mess}</p>
-    <input style="margin-bottom: 8px; border-radius: 8px" name="user" value="${username}" type="text" id="user" class="form-control" placeholder="Username" required="" autofocus="">
-    <input style="margin-bottom: 8px; border-radius: 8px" name="pass" value="${password}" type="password" id="password" class="form-control" placeholder="Password" required="">
+    <input style="margin-bottom: 8px; border-radius: 8px" name="user" value="${username}" type="text" id="user" class="form-control" placeholder="Username" autofocus="">
+    <input style="margin-bottom: 8px; border-radius: 8px" name="pass" value="${password}" type="password" id="password" class="form-control" placeholder="Password" >
 
     <div class="form-group form-check">
 
@@ -28,8 +28,12 @@
     <input type="text" id="loginFB" name="loginFB" value="false" style="display: none;">
 
     <div class="form-group">            
-        <button class="btn btn-success btn-block" id="btnSubmit" type="submit" style="background-image: linear-gradient(to right, #00f79c, #04f1f5); color: black; width: 200px; margin: auto; padding: 10px; border-radius: 8px"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+        <button class="btn btn-success btn-block portal-button" id="btnSubmit" type="submit" value="login" name="buttonType">
+            <i class="fas fa-sign-in-alt"></i> Sign in
+        </button>
         <hr>
-        <button class="btn btn-primary btn-block" type="button" style="background-image: linear-gradient(to right, #00f79c, #04f1f5); color: black; width: 200px; margin: auto; padding: 10px; border-radius: 8px" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up</button>
+        <button class="btn btn-primary btn-block portal-button" id="btn-signup" type="submit" value="signup" name="buttonType">
+            <i class="fas fa-user-plus"></i> Sign up
+        </button>
     </div>
 </form>

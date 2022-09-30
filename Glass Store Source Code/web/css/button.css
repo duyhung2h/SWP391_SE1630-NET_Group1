@@ -1,0 +1,17 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 1, 2022, 12:53:55 AM
+    Author     : Admin
+*/
+.portal-button {
+  background-image: linear-gradient(to right, #00f79c, #04f1f5);
+  color: black;
+  width: 200px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 8px;
+}

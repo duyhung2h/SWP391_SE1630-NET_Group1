@@ -32,15 +32,34 @@ public class LoginController extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
-            request.setAttribute("screen", "login");
 
+            System.out.println("---type---");
+            String buttonType = request.getParameter("buttonType");
+            System.out.println(buttonType);
+
+            try {
+                switch (buttonType) {
+                    case "signup": {
+                        request.setAttribute("screen", "signup");
+                        response.sendRedirect("/signup");
+                        return;
+                    }
+                    case "login": {
+                        request.setAttribute("screen", "login");
+                        response.sendRedirect("/login");
+                        return;
+                    }
+                }
+            } catch (Exception e) {
+            }
+
+            request.setAttribute("screen", "login");
             request.getRequestDispatcher("portal.jsp").forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

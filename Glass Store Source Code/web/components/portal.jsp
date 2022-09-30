@@ -13,7 +13,7 @@
             <div class="row" >
                 <div class="col-md-1"></div>
                 <div class="col-md-5" style="margin: 0px; -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3); float: right; background-color: white; opacity: 100%">
-                    <img style="height: 585px; width: 375px; opacity: 100%" src="image/Login.gif" alt=""/>
+                    <img style="height: 585px; width: 375px; opacity: 100%" src="images/Login.gif" alt=""/>
                 </div>
                 <div class="col-md-5" id="logreg-forms" style="background-image: linear-gradient(to bottom right, #c165dd, #268bff); margin: 0px; -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3); opacity: 100%">
                     <c:if test="${screen=='login'}">
