@@ -35,10 +35,22 @@ git push
 
 # Coding Convention
 
-- Tên file .jsp để chữ thường. Ví dụ:
+- Để chữ thường: Tên file JSP, tên biến,... Ví dụ:
 ```
 login.jsp
 panelLogin.jsp
+
+string userPassword = "";
+```
+
+
+- In hoa chữ cái đầu: Tên java class, tên file java,... Ví dụ:
+```
+ConnectionDAO.java
+LoginController.java
+
+public class User {}
+
 ```
 
 - Comment block trong file java:
