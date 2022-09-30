@@ -32,3 +32,25 @@ git add .
 git commit -m "nêu lên những thay đổi"
 git push
 ```
+
+# Coding Convention
+
+- Tên file .jsp để chữ thường. Ví dụ:
+```
+login.jsp
+panelLogin.jsp
+```
+
+- Comment block trong file java:
+```
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+```
+
