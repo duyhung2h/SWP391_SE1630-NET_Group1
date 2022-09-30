@@ -34,7 +34,7 @@ public class SignupController extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             request.setAttribute("screen", "signup");
 
-            request.getRequestDispatcher("signup.jsp").forward(request, response);
+            request.getRequestDispatcher("portal.jsp").forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
