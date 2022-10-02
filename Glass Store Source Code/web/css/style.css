@@ -2,6 +2,12 @@
 ** Style Simple Ecommerce Theme for Bootstrap 4
 ** Created by T-PHP https://t-php.fr/43-theme-ecommerce-bootstrap-4.html
 */
+
+.secondary-text-color{
+    display: inline;
+    color: #434e65;
+}
+
 .notification {
     background-color: #555;
     color: white;

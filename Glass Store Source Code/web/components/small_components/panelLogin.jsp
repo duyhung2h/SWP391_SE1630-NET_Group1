@@ -5,35 +5,42 @@
 --%>
 <form class="form-signin" id="login-form" action="/login" method="post">
     <br><br><br><br>
-    <h1 class="h3 mb-3 font-weight-normal" style="text-align: center; font-family: Brush Script Std"> Sign in</h1>
+    <h1 class="h3 mb-3 font-weight-normal text-center"> Sign in</h1>
     <p class="text-danger">${mess}</p>
-    <input style="margin-bottom: 8px; border-radius: 8px" name="user" value="${username}" type="text" id="user" class="form-control" placeholder="Username" autofocus="">
-    <input style="margin-bottom: 8px; border-radius: 8px" name="pass" value="${password}" type="password" id="password" class="form-control" placeholder="Password" >
+    <input name="user" value="${username}" type="text" id="user" class="form-control" placeholder="Username" autofocus="">
+    <input name="pass" value="${password}" type="password" id="password" class="form-control" placeholder="Password" >
 
-    <div class="form-group form-check">
+    <div class="form-group">
 
         <ul>
-            <li style="display: inline-block;">
+            <li class="d-inline-block">
                 <input name="remember" value="1" type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1" style="margin: auto; ; display: inline-block">Remember me</label>
+                <label class="form-check-label w-100" for="exampleCheck1">Remember me</label>
             </li>
-            <li style="display: inline-block; margin: 5px 30px"></li>
-            <li style="display: inline-block">
-                <a href="ForgetPass.jsp" style="color: #000; text-align: center" style="margin: auto; display: inline-block"><i class="fa fa-lock-alt" style="color: black"></i>Forget Password</a>
+            <li class="d-inline-block"></li>
+            <li class="d-inline-block">
             </li>
         </ul>
     </div>
-    <!-- For fb login -->
-    <input type="text" id="email" name="email" style="display: none;">
-    <input type="text" id="loginFB" name="loginFB" value="false" style="display: none;">
 
     <div class="form-group">            
-        <button class="btn btn-success btn-block portal-button" id="btnSubmit" type="submit" value="login" name="buttonType">
+        <button class="btn btn-success btn-block portal-button w-100" id="btnSubmit" type="submit" value="login" name="buttonType">
             <i class="fas fa-sign-in-alt"></i> Sign in
         </button>
         <hr>
-        <button class="btn btn-primary btn-block portal-button" id="btn-signup" type="submit" value="signup" name="buttonType">
-            <i class="fas fa-user-plus"></i> Sign up
-        </button>
+        <div class="d-flex justify-content-center text-center">
+            <div class="my-auto">
+            Don't have an account?
+            </div>
+            <button class="btn btn-primary btn-block portal-button" id="btn-signup" type="submit" value="signup" name="buttonType">
+                <i class="fas fa-user-plus"></i> Sign up
+            </button>
+        </div>
+        <br>
+        <div class="d-flex justify-content-center text-center ">
+            <button class="secondary-text-color " type="submit" value="forgetpass" name="buttonType">
+                I forgot my password
+            </button>
+        </div>
     </div>
 </form>

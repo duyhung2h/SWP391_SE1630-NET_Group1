@@ -32,8 +32,28 @@ public class SignupController extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
-            request.setAttribute("screen", "signup");
+            
+            System.out.println("---type---");
+            String buttonType = request.getParameter("buttonType");
+            System.out.println(buttonType);
 
+            try {
+                switch (buttonType) {
+                    case "signup": {
+                        request.setAttribute("screen", "signup");
+                        response.sendRedirect("/signup");
+                        return;
+                    }
+                    case "login": {
+                        request.setAttribute("screen", "login");
+                        response.sendRedirect("/login");
+                        return;
+                    }
+                }
+            } catch (Exception e) {
+            }
+            
+            request.setAttribute("screen", "signup");
             request.getRequestDispatcher("portal.jsp").forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("error.jsp").forward(request, response);
