@@ -33,6 +33,14 @@ git commit -m "nêu lên những thay đổi"
 git push
 ```
 
+- Khi muốn về lại nhánh cũ (nhớ clone một backup trước khi thay đổi):
+```
+git reset --hard <ten nhanh cu>
+git add .
+git commit -m "doi lai commit"
+git push -f
+```
+
 # Coding Convention
 
 - Để chữ thường: Tên file JSP, tên biến,... Ví dụ:
