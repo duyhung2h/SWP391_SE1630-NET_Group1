@@ -1,0 +1,59 @@
+i{
+    margin: 2px;
+    padding: 2px;
+}
+
+.nav-link{
+    position: relative;
+    font-size: medium;
+    display: inline-block;
+    color: rgb(43, 189, 179);
+    overflow: hidden;
+    background: linear-gradient(to right, rgb(43, 189, 179), midnightblue 50%, royalblue 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease;
+    text-decoration: none; 
+}
+.nav-link:hover{
+    background-position: 0 100%;
+}
+
+nav{
+    background-color: #ebebf2;
+}
+
+.line{
+    height:1px;
+    border-width:0;
+    color:gray;
+    background-color:gray;
+}
+
+.nav-link:active{
+    background-color: #2bbd9d;
+    color: black;
+}
+#headerImage{
+    margin-left: 70px;
+    padding: 0px;
+}
+#total{
+    color: black;
+    text-align: center;
+}
+
+#amount{
+    font-size: 80px;
+    text-align: center;
+}
+
+#dashboardCard{
+    background-image: linear-gradient(to right, #cba1f7, #9dc8f5);
+}
+script{
+    font-weight: bold;
+}
