@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Load du lieu tu SQL Server
  *
  * @author ADMIN
  */
-//Load du lieu tu SQL Server
 public class ProductDAO extends BaseDAO<Product> {
 
     PreparedStatement ps = null; //...
@@ -39,18 +39,15 @@ public class ProductDAO extends BaseDAO<Product> {
 
         return list;
     }
- public static void main(String[] args) {
+
+    public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        
+
         /*---------Test Case for getRelatedProduct() method---------*/
         List<Product> list = dao.getAllProduct();
         for (Product o : list) {
             System.out.println(o.getName());
         }
-        }
-
-        
+    }
 
 }
-    
-
