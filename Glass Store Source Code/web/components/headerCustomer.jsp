@@ -29,7 +29,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="home"><img class="navbar-brand" src="../images/Logo.png" width="200px"></a>
+            <a href="homepage"><img class="navbar-brand" src="../images/Logo.png" width="200px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -38,12 +38,12 @@
                 <ul class="navbar-nav mr-auto row align-items-start col-4">
                     <!--Link to Home Page-->
                     <li class="nav-item active">
-                        <a class="nav-link d-inline-block" href="home"><i class="fa fa-home d-inline-block" id="home"></i> Homepage</a>
+                        <a class="nav-link d-inline-block" href="homepage"><i class="fa fa-home d-inline-block" id="home"></i> Homepage</a>
                     </li>
 
                     <!--Link to ProductList-->
                     <li class="nav-item">
-                        <a class="nav-link " href="productList" id="linkHover">Products</a>
+                        <a class="nav-link " href="products" id="linkHover">Products</a>
                     </li>
 
                     <!--N?u acc khác null -> login r?i -> hi?n th? c? 3 menu d??i-->
@@ -132,11 +132,11 @@
                         </li>
                     </c:if>
                 </ul>
-                <form class="form-inline my-2 my-lg-0 col-8 justify-content-end" action="search" method="GET">
+                <form class="form-inline my-2 my-lg-0 col-8 justify-content-end" action="products" method="GET">
                     <input class="form-control mr-sm-2 col-5" type="search" placeholder="Search" aria-label="Search..." oninput="searchByName(this)" value="${txtS}" name="txt" id="searchText">
                     <button class="btn my-2 my-sm-0" type="submit" id="search"><i class="fa fa-search"></i></button>
 
-                    <a class="btn btn-sm ml-4" href="show" id="cart">
+                    <a class="btn btn-sm ml-4" href="cart" id="cart">
                         <i class="fa fa-shopping-cart"></i> Cart
                         <span class="badge badge-light" id="CartNum">${c.countNumCart(sessionScope.acc.id)}</span>
                     </a>

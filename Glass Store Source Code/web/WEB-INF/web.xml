@@ -20,9 +20,17 @@
         <servlet-name>ProductListController</servlet-name>
         <servlet-class>control.ProductListController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomepageController</servlet-name>
+        <servlet-class>control.HomepageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CartController</servlet-name>
+        <servlet-class>control.CartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern/>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -38,7 +46,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductListController</servlet-name>
-        <url-pattern>/productsList</url-pattern>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomepageController</servlet-name>
+        <url-pattern>/homepage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CartController</servlet-name>
+        <url-pattern>/cart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
