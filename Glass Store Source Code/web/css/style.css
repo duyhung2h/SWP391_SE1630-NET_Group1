@@ -8,6 +8,17 @@
     color: #434e65;
 }
 
+.backgrounds {
+    height: 500px;
+    width: 100%;
+}
+.title {
+    text-align: center;
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 30px;
+}
 .notification {
     background-color: #555;
     color: white;
