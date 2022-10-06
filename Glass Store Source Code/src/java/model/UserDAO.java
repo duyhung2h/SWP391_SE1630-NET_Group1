@@ -15,8 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The class contains method find update, delete, insert staff information from
+ * Staff table in database. In the update or insert method, all data will be
+ * normalized (trim space) before update/insert into database The method wil
+ * throw an object of <code>java.lang.Exception</code> class if there is any
+ * error occurring when finding, inserting, or updating data
+ * <p>
+ * Bugs: Still have some issues related to search staff by address
  *
- * @author ADMIN
+ * @author Nguyen Van Hoang
  */
 public class UserDAO extends BaseDAO<Account> {
 
@@ -348,7 +355,7 @@ public class UserDAO extends BaseDAO<Account> {
                 + "WHERE Username LIKE ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, "%" + name + "%");            
+            ps.setString(1, "%" + name + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Account(rs.getInt(1), rs.getString(2),
@@ -386,10 +393,9 @@ public class UserDAO extends BaseDAO<Account> {
         //   System.out.println(account);
         //}
         //System.out.println(UserDAO.checkForgetPassword("nguyenthegiang", "nguyenthe.giang.775@gmail.com"));
-        
         /*---------Test Case for searchAccountInManager() method---------*/
         List<Account> list = UserDAO.searchAccountInManager("giang");
-        for(Account a : list) {
+        for (Account a : list) {
             System.out.println(a);
         }
     }
