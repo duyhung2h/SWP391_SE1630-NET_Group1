@@ -28,6 +28,10 @@
         <servlet-name>CartController</servlet-name>
         <servlet-class>control.CartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AccountManagerController</servlet-name>
+        <servlet-class>control.AccountManagerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AccountManagerController</servlet-name>
+        <url-pattern>/accountManager</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

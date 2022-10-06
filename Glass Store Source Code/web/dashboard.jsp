@@ -43,7 +43,7 @@
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-12">
-                                        <a href="accountManager" style="text-decoration: none;"><img src="image/Other/AccountDashboard.jpg" alt="" id="headerImage" width="250px"/></a>
+                                        <a href="accountManager" style="text-decoration: none;"><img src="images/AccountDashboard.jpg" alt="" id="headerImage" width="250px"/></a>
                                     </div>
                                     <div class="col-md-12" id="dashboardCard">
                                         <div class="card-body">
@@ -59,7 +59,7 @@
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-12">
-                                        <a href="manager" style="text-decoration: none;"><img src="image/Other/ProductDashboard.jpg" alt="" id="headerImage" width="250px"/></a>
+                                        <a href="manager" style="text-decoration: none;"><img src="images/ProductDashboard.jpg" alt="" id="headerImage" width="250px"/></a>
                                     </div>
                                     <div class="col-md-12" id="dashboardCard">
                                         <div class="card-body">
@@ -75,7 +75,7 @@
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-12">
-                                        <a href=""><img src="image/Other/InvoiceDashboard.jpg" alt="" id="headerImage" width="250px"/></a>
+                                        <a href=""><img src="images/InvoiceDashboard.jpg" alt="" id="headerImage" width="250px"/></a>
                                     </div>
                                     <c:if test="${sessionScope.acc.isAdmin == 1}">
                                         <div class="col-md-12" id="dashboardCard">
