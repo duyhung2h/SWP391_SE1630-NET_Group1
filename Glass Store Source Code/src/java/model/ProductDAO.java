@@ -40,14 +40,117 @@ public class ProductDAO extends BaseDAO<Product> {
         return list;
     }
 
+    public Product getHotProduct() {
+        //Product with most amount
+
+        String query = "SELECT TOP 1 * FROM Product ORDER BY Amount DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @return get the first and the second product with most sold amount
+     */
+
+    public Product getFavoriteProduct() {
+        //Product with second most amount
+        String query = "SELECT TOP 2 * FROM Product ORDER BY Amount DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rs.next();
+                return new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public int countProduct() {
+        String query = "SELECT COUNT(*) FROM Product";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public int countProductByCategory(int CategoryID) {
+        if (CategoryID == 0) {
+            return countProduct();
+        } else {
+            String query = "SELECT COUNT(*) FROM Product WHERE CategoryID = ?";
+            try {
+                ps = connection.prepareStatement(query);
+                ps.setInt(1, CategoryID);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            } catch (Exception e) {
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Showing list of products with input category id
+     *
+     * @param id
+     * @return list of products with category Id
+     */
+    public List<Product> getProductsByCateId(int id) { //Must be int type because when saving to Session, it is still int
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE CategoryId = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
 
         /*---------Test Case for getRelatedProduct() method---------*/
-        List<Product> list = dao.getAllProduct();
-        for (Product o : list) {
-            System.out.println(o.getName());
-        }
-    }
+//        List<Product> list = dao.getAllProduct();
+//        for (Product o : list) {
+//            System.out.println(o.getName());
+//        }
+//    }
+        /*---------Test Case for getHotProduct() method---------*/
+//        System.out.println(dao.getHotProduct());
+//      }
 
+        /*---------Test Case for getFavoriteProduct() method---------*/
+//        System.out.println(dao.getFavoriteProduct());
+//      }
+
+        /*---------Test Case for countProductByCategory() method---------*/
+        System.out.println(dao.countProductByCategory(1));
+
+        /*---------Test Case for getProductBySellID() method---------*/
+//        List<Product> list = dao.getProductsByCateId(2);
+//        for (Product product : list) {
+//            System.out.println(product);
+//        }
+    }
 }

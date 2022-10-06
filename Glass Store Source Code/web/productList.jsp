@@ -8,6 +8,7 @@
     </head>
     <body>
         <jsp:include page="components/headerCustomer.jsp" />
+        
         <br>
         <br>
         <div class="row">

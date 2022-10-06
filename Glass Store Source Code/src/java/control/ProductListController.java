@@ -5,12 +5,17 @@
  */
 package control;
 
+import entity.Category;
+import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.CategoryDAO;
+import model.ProductDAO;
 
 /**
  *
@@ -31,12 +36,42 @@ public class ProductListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-         request.getRequestDispatcher("productList.jsp").forward(request, response);
+         ProductDAO ProductDAO = new ProductDAO();
+        CategoryDAO CategoryDAO = new CategoryDAO();
+        List<Category> listC = CategoryDAO.getAllCategory(); //Get List Category
+        Product hot = ProductDAO.getHotProduct(); //Get First Product
+        Product favor = ProductDAO.getFavoriteProduct(); //Get Last Product
 
-        
-        
-        
-        
+        //Paging By CategoryID
+        String CategoryID = request.getParameter("CategoryID");
+        if (CategoryID == null) { //On Load: User hasn't choosen Category
+            CategoryID = "0";
+        }
+        //Set Category ID back on JSP
+        request.setAttribute("CategoryID", CategoryID);
+
+        int CID = Integer.parseInt(CategoryID);
+
+        //Get Page number from JSP
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            //On load: Page 1
+            indexPage = "1";
+        }
+
+        int index = Integer.parseInt(indexPage);
+
+        //Count number of Product According to the Category -> Number of Pages
+        int count = ProductDAO.countProductByCategory(CID);
+        int endPage = count / 6;
+        if (count % 6 != 0) {
+            //If the number of Product isn't divided by 3 -> Need 1 more Page
+            endPage++;
+        }
+
+
+        request.getRequestDispatcher("productList.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
