@@ -36,8 +36,9 @@ public class ProductListController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-         ProductDAO ProductDAO = new ProductDAO();
-        CategoryDAO CategoryDAO = new CategoryDAO();
+            ProductDAO ProductDAO = new ProductDAO();
+            CategoryDAO CategoryDAO = new CategoryDAO();
+            
         List<Category> listC = CategoryDAO.getAllCategory(); //Get List Category
         Product hot = ProductDAO.getHotProduct(); //Get First Product
         Product favor = ProductDAO.getFavoriteProduct(); //Get Last Product

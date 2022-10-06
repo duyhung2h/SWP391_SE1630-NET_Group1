@@ -126,6 +126,28 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return list;
     }
+    
+        public ProductDetail getProductDetailByID(String id) { //Must be int type because when saving to Session, it is still int
+        String query = "SELECT * \n"
+                + "FROM Product INNER JOIN Manufacturer\n"
+                + "ON Product.ManufacturerID = Manufacturer.ManufacturerID\n"
+                + "WHERE ProductID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return (new ProductDetail(rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getInt("SellPrice"),
+                        rs.getString("imageLink"),
+                        rs.getString("ManufacturerName")));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
@@ -145,12 +167,16 @@ public class ProductDAO extends BaseDAO<Product> {
 //      }
 
         /*---------Test Case for countProductByCategory() method---------*/
-        System.out.println(dao.countProductByCategory(1));
+//        System.out.println(dao.countProductByCategory(1));
 
         /*---------Test Case for getProductBySellID() method---------*/
 //        List<Product> list = dao.getProductsByCateId(2);
 //        for (Product product : list) {
 //            System.out.println(product);
 //        }
+
+        /*---------Test Case for getProductDetailByID() method---------*/
+      System.out.println(dao.getProductDetailByID("1"));
+
     }
 }
