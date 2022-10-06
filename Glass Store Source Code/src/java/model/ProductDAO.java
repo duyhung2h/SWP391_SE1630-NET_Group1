@@ -59,7 +59,6 @@ public class ProductDAO extends BaseDAO<Product> {
      *
      * @return get the first and the second product with most sold amount
      */
-
     public Product getFavoriteProduct() {
         //Product with second most amount
         String query = "SELECT TOP 2 * FROM Product ORDER BY Amount DESC";
@@ -88,6 +87,7 @@ public class ProductDAO extends BaseDAO<Product> {
         return 0;
     }
 
+    //count total product
     public int countProductByCategory(int CategoryID) {
         if (CategoryID == 0) {
             return countProduct();
@@ -126,8 +126,9 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return list;
     }
-    
-        public ProductDetail getProductDetailByID(String id) { //Must be int type because when saving to Session, it is still int
+
+    //Get Product for Detail
+    public ProductDetail getProductDetailByID(String id) { //Must be int type because when saving to Session, it is still int
         String query = "SELECT * \n"
                 + "FROM Product INNER JOIN Manufacturer\n"
                 + "ON Product.ManufacturerID = Manufacturer.ManufacturerID\n"
@@ -155,9 +156,8 @@ public class ProductDAO extends BaseDAO<Product> {
         /*---------Test Case for getRelatedProduct() method---------*/
 //        List<Product> list = dao.getAllProduct();
 //        for (Product o : list) {
-//            System.out.println(o.getName());
+//            System.out.println(o.toString());
 //        }
-//    }
         /*---------Test Case for getHotProduct() method---------*/
 //        System.out.println(dao.getHotProduct());
 //      }
@@ -176,7 +176,7 @@ public class ProductDAO extends BaseDAO<Product> {
 //        }
 
         /*---------Test Case for getProductDetailByID() method---------*/
-      System.out.println(dao.getProductDetailByID("1"));
+        System.out.println(dao.getProductDetailByID("1"));
 
     }
 }

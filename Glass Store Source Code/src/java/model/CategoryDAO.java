@@ -61,6 +61,6 @@ public class CategoryDAO extends BaseDAO<Category> {
 //        }
         
         /*---------Test Case for getAllCategory() method---------*/
-        System.out.println(dao.getCateNameByID(1));        
+ //       System.out.println(dao.getCateNameByID(1));        
     }
 }
