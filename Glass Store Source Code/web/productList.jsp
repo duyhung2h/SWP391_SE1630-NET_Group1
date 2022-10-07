@@ -71,135 +71,25 @@
 
             <div class="col-md-9 col-sm-9">
                 <div class="row" id="content">
-                    <!--List Product-->
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card" id="product"> 
-                            <a href="detail?ProductID=3" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
-                            <div class="card-body">
-                                <h4 class="card-title show_txt"><a href="detail?ProductID=3" title="View Product">Kính Thời Trang</a></h4>
-                                <div class="row">
-                                    <div class="col">
-                                        <a onclick="addCart(3)"><p class="btn btn-warning btn-block" id="price">23.000.000 VND</p></a>
-
-                                    </div>
-                                    <div class="col">
-                                        <a onclick="addCart(3)" class="btn btn-info btn-block" id="cart">Add to cart</a>
-                                    </div>
-                                    <div class="col">
-                                        <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=3"><p class="btn btn-warning btn-block">Add to Compare</p></a>
+                        <!--List Product-->
+                    <c:forEach items="${listP}" var="o">
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="card" id="product"> <!--class="card"-->
+                                <!--Product's image-->
+                                <a href="detail?ProductID=${o.id}" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
+                                <div class="card-body">
+                                    <!--Product's name. Onlick: Product's Detail-->
+                                    <h4 class="card-title show_txt"><a href="detail?ProductID=${o.id}" title="View Product">${o.name}</a></h4>
+                                    <div class="row">
+                                        <div class="col">
+                                            <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=${o.id}"><p class="btn btn-warning btn-block">Add to Compare</p></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card" id="product"> 
-                            <a href="detail?ProductID=5" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
-                            <div class="card-body">
-                                <h4 class="card-title show_txt"><a href="detail?ProductID=5" title="View Product">Kính Thời Trang</a></h4>
-                                <div class="row">
-                                    <div class="col">
-                                        <a onclick="addCart(5)"><p class="btn btn-warning btn-block" id="price">17.000.000 VND</p></a>
-
-                                    </div>
-                                    <div class="col">
-                                        <a onclick="addCart(5)" class="btn btn-info btn-block" id="cart">Add to cart</a>
-                                    </div>
-                                    <div class="col">
-                                        <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=5"><p class="btn btn-warning btn-block">Add to Compare</p></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card" id="product"> 
-                            <a href="detail?ProductID=8" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
-                            <div class="card-body">
-                                <h4 class="card-title show_txt"><a href="detail?ProductID=8" title="View Product">Kính Thời Trang</a></h4>
-                                <div class="row">
-                                    <div class="col">
-                                        <a onclick="addCart(8)"><p class="btn btn-warning btn-block" id="price">2.000.000 VND</p></a>
-
-                                    </div>
-                                    <div class="col">
-                                        <a onclick="addCart(8)" class="btn btn-info btn-block" id="cart">Add to cart</a>
-                                    </div>
-                                    <div class="col">
-                                        <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=8" style="text-decoration: none;"><p class="btn btn-warning btn-block">Add to Compare</p></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card" id="product"> 
-                            <a href="detail?ProductID=22" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
-                            <div class="card-body">
-                                <h4 class="card-title show_txt"><a href="detail?ProductID=22" title="View Product">Kính Thời Trang</a></h4>
-                                <div class="row">
-                                    <div class="col">
-                                        <a onclick="addCart(22)"><p class="btn btn-warning btn-block" id="price">18.000.000 VND</p></a>
-
-                                    </div>
-                                    <div class="col">
-                                        <a onclick="addCart(22)" class="btn btn-info btn-block" id="cart">Add to cart</a>
-                                    </div>
-                                    <div class="col">
-                                        <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=22"><p class="btn btn-warning btn-block">Add to Compare</p></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card" id="product"> 
-                            <a href="detail?ProductID=23" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
-                            <div class="card-body">
-                                <h4 class="card-title show_txt"><a href="detail?ProductID=23" title="View Product">Kính Thời Trang</a></h4>
-                                <div class="row">
-                                    <div class="col">
-                                        <a onclick="addCart(23)"><p class="btn btn-warning btn-block" id="price">25.000.000 VND</p></a>
-
-                                    </div>
-                                    <div class="col">
-                                        <a onclick="addCart(23)" class="btn btn-info btn-block" id="cart">Add to cart</a>
-                                    </div>
-                                    <div class="col">
-                                        <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=23"><p class="btn btn-warning btn-block">Add to Compare</p></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card" id="product">
-                            <a href="detail?ProductID=24" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
-                            <div class="card-body">
-                                <h4 class="card-title show_txt"><a href="detail?ProductID=24" title="View Product">Kính Thời Trang</a></h4>
-                                <div class="row">
-                                    <div class="col">
-                                        <a onclick="addCart(24)"><p class="btn btn-warning btn-block" id="price">209.899.000 VND</p></a>
-
-
-                                    </div>
-                                    <div class="col">
-                                        <a onclick="addCart(24)" class="btn btn-info btn-block" id="cart">Add to cart</a>
-                                    </div>
-                                    <div class="col">
-                                        <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=24"><p class="btn btn-warning btn-block">Add to Compare</p></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    </c:forEach>
+                </div>
                 </div>
 
                 <div class="clearfix">

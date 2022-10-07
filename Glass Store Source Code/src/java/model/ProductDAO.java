@@ -19,8 +19,7 @@ import java.util.List;
  * @author ADMIN
  */
 public class ProductDAO extends BaseDAO<Product> {
-
-    PreparedStatement ps = null; //...
+PreparedStatement ps = null; //...
     ResultSet rs = null; //Get the results returned
 
     public List<Product> getAllProduct() {
@@ -99,41 +98,6 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return list;
     }
-    
-        public List<Product> pagingProduct(int index) {
-        List<Product> list = new ArrayList<>();
-        String query = "SELECT * FROM Product ORDER BY ProductID OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
-        try {
-            ps = connection.prepareStatement(query);
-            ps.setInt(1, (index - 1) * 6);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
-    
-     public List<Product> pagingByCategory(int index, int CategoryID) {
-        List<Product> list = new ArrayList<>();
-        if (CategoryID == 0) {
-            list = pagingProduct(index);
-        } else {
-            String query = "SELECT * FROM Product WHERE CategoryID = ? ORDER BY ProductID OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
-            try {
-                ps = connection.prepareStatement(query);
-                ps.setInt(1, CategoryID);
-                ps.setInt(2, (index - 1) * 6);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
-                }
-            } catch (Exception e) {
-            }
-        }
-        return list;
-    }
 
     /**
      * Showing list of products with input category id
@@ -168,7 +132,79 @@ public class ProductDAO extends BaseDAO<Product> {
      * @param SellerID
      * @param amount
      */
+    public void edit(String id, String name, String description, String price, String imageLink, String CategoryID, String SellerID, String amount) {
+        String query = "UPDATE Product\n"
+                + "SET ProductName = ?,\n"
+                + "Description = ?,\n"
+                + "SellPrice = ?,\n"
+                + "imageLink = ?,\n"
+                + "CategoryID = ?,\n"
+                + "SellerID = ?,\n"
+                + "Amount = ?\n"
+                + "WHERE ProductID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            //Set data to the "?"
+            ps.setString(1, name);
+            ps.setString(2, description);
+            ps.setString(3, price);
+            ps.setString(4, imageLink);
+            ps.setString(5, CategoryID);
+            ps.setString(6, SellerID);
+            ps.setString(7, amount);
+            ps.setString(8, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
+    /**
+     * Delete a product, select by its ID
+     *
+     * @param id
+     */
+    public void delete(String id) { //Leave the String type because when you get it, it's of type String -> Saves having to cast it
+        String query = "DELETE FROM Cart WHERE ProductID = ?\n"
+                + "DELETE FROM Product WHERE ProductID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            //Put the id inside the first "?"
+            ps.setString(1, id);
+            ps.setString(2, id);
+            //Execute: No Result table -> No RS, only executeUpdate execute
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    /**
+     * Adding a new product to the database, the ID is no need to be added
+     * because it is automatically added
+     *
+     * @param name
+     * @param description
+     * @param price
+     * @param imageLink
+     * @param CategoryID
+     * @param SellerID
+     * @param amount
+     */
+    public void add(String name, String description, String price, String imageLink, String CategoryID, String SellerID, String amount) {
+        String query = "INSERT INTO Product VALUES (?, ?, 0, ?, 0, ?, ?, ?, ?, 1, 1);";
+        try {
+            ps = connection.prepareStatement(query);
+            //Set data to the "?"
+            ps.setString(1, name);
+            ps.setString(2, description);
+            ps.setString(3, price);
+            ps.setString(4, imageLink);
+            ps.setString(5, CategoryID);
+            ps.setString(6, SellerID);
+            ps.setString(7, amount);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
     /**
      *
@@ -187,7 +223,80 @@ public class ProductDAO extends BaseDAO<Product> {
         return 0;
     }
 
+    /**
+     * Every 6 products will be displayed in a single page
+     *
+     * @param index
+     * @return list of 6 products
+     */
+    public List<Product> pagingProduct(int index) {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT * FROM Product ORDER BY ProductID OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (index - 1) * 6);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
+    /**
+     * categorizing products
+     *
+     * @param index
+     * @param CategoryID
+     * @return list of products with same category
+     */
+    public List<Product> pagingByCategory(int index, int CategoryID) {
+        List<Product> list = new ArrayList<>();
+        if (CategoryID == 0) {
+            list = pagingProduct(index);
+        } else {
+            String query = "SELECT * FROM Product WHERE CategoryID = ? ORDER BY ProductID OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+            try {
+                ps = connection.prepareStatement(query);
+                ps.setInt(1, CategoryID);
+                ps.setInt(2, (index - 1) * 6);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+                }
+            } catch (Exception e) {
+            }
+        }
+        return list;
+    }
+
+    /**
+     *
+     * @param index
+     * @param SellerID
+     * @return
+     */
+    public List<Product> pagingManagerProduct(int index, int SellerID) {
+        List<Product> list = new ArrayList<>();
+        if (SellerID == 0) {
+            list = pagingProduct(index);
+        } else {
+            String query = "SELECT * FROM Product WHERE SellerID = ? ORDER BY ProductID OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+            try {
+                ps = connection.prepareStatement(query);
+                ps.setInt(1, SellerID);
+                ps.setInt(2, (index - 1) * 6);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return list;
+    }
 
 //    public List<Product> searchProductInManager(int SellerID, String name) {
 //        List<Product> list = new ArrayList<>();
@@ -262,6 +371,227 @@ public class ProductDAO extends BaseDAO<Product> {
         } catch (Exception e) {
         }
         return null;
+    }
+
+    /**
+     * Get the category id of a specific product by its id
+     *
+     * @param productId
+     * @return category id of the product
+     */
+    public String getCateIdOfProductByID(String productId) {
+
+        String query = "SELECT CategoryId FROM Product WHERE ProductID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, productId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getString("CategoryId");
+            }
+        } catch (Exception e) {
+
+        }
+        return "";
+    }
+
+    //Get Product for Detail
+    public ProductDetail getProductDetailByID(String id) { //Must be int type because when saving to Session, it is still int
+        String query = "SELECT * \n"
+                + "FROM Product INNER JOIN Manufacturer\n"
+                + "ON Product.ManufacturerID = Manufacturer.ManufacturerID\n"
+                + "WHERE ProductID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return (new ProductDetail(rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getInt("SellPrice"),
+                        rs.getString("imageLink"),
+                        rs.getString("ManufacturerName")));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    /**
+     * Get a particular product
+     *
+     * @param id
+     * @return a product
+     */
+    public ProductInManager getProductForManager(String id) { //Must be int type because when saving to Session, it is still int
+        String query = "SELECT * FROM Product WHERE ProductID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return (new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    /**
+     * Search for a particular product by filling its name
+     *
+     * @param name
+     * @return a product
+     */
+    public List<Product> searchProductByName(String name) {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE ProductName LIKE ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + name + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Product> searchProductByNameAndCateId(String name, String cateId) {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE ProductName LIKE ? AND CategoryId=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + name + "%");
+            ps.setString(2, cateId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    /**
+     * Search for a product in admin/moderator mode by filling its name
+     *
+     * @param name
+     * @param SellerID
+     * @return a product
+     */
+    public List<Product> searchProductInManager(String name, int SellerID) {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE ProductName LIKE ? AND SellerID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + name + "%");
+            ps.setInt(2, SellerID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    /**
+     * Select top 3 most sold products
+     *
+     * @return products
+     */
+    public List<ProductInManager> top3MostSell() {
+        List<ProductInManager> list = new ArrayList<>();
+        String query = "SELECT TOP 3 * FROM Product ORDER BY Amount ASC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    /**
+     * select top 3 least sold products
+     *
+     * @return products
+     */
+    public List<ProductInManager> top3LeastSell() {
+        List<ProductInManager> list = new ArrayList<>();
+        String query = "SELECT TOP 3 * FROM Product ORDER BY Amount DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Product> countProductByCategory() {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT COUNT(*) AS Amount, Category.CategoryName\n"
+                + "FROM Product \n"
+                + "INNER JOIN Category\n"
+                + "ON Product.CategoryID = Category.CategoryID\n"
+                + "GROUP BY Product.CategoryID, Category.CategoryName";
+        try {
+            ps = connection.prepareStatement(query);//Throw the query to the SQL server 
+            rs = ps.executeQuery();//Run the query, get the results returned
+
+            //Now, the command has been run, rs is the Result version -> Now have to get the data from the rs table and put it in the List
+            while (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getInt("amount"));
+                p.setName(rs.getString("CategoryName"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+    }
+
+
+    public List<Product> getRelatedProduct(int catID) { //Must be int type because when saving to Session, it is still int
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT TOP 3 *\n"
+                + "FROM Product\n"
+                + "WHERE CategoryID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, catID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    public List<Product> getTop4SalePercent() {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT TOP 4 * FROM Product ORDER BY SalePercent DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
     }
 
     public static void main(String[] args) {
@@ -355,6 +685,11 @@ public class ProductDAO extends BaseDAO<Product> {
 //            System.out.println(productInManager);
 //        }
 
+        /*---------Test Case for countProductByCategory() method---------*/
+        List<Product> list = dao.countProductByCategory();
+        for (Product product : list) {
+            System.out.println(product);
+        }
 
         /*---------Test Case for countProductByCategory() method---------*/
 //        List<Product> list = dao.getTop4SalePercent();
@@ -362,5 +697,7 @@ public class ProductDAO extends BaseDAO<Product> {
 //            System.out.println(product);
 //        }
     }
+    
+    
     
 }

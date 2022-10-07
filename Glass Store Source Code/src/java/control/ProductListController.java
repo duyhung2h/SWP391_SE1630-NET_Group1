@@ -79,6 +79,7 @@ public class ProductListController extends HttpServlet {
 
                 //Set Data to JSP
                 request.setAttribute("allCategory", listC);
+                System.out.println(list);
                 request.setAttribute("listP", list); //List Product
                 request.setAttribute("end", endPage);
                 request.setAttribute("tag", index); //Page number
