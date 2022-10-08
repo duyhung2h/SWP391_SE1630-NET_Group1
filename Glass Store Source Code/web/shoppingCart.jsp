@@ -12,7 +12,9 @@
         <title>Your Cart - Glass Store</title>
     </head>
     <body>
-        <jsp:include page="components/headerCustomer.jsp" />
+        <jsp:include page="components/headerCustomer.jsp">
+            <jsp:param name="acc" value="${sessionScope.acc.user}"/>
+        </jsp:include>
         <div class="title">
             Shopping Cart
         </div>

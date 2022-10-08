@@ -7,8 +7,9 @@
         <title>Product List - Glass Store</title>
     </head>
     <body>
-        <jsp:include page="components/headerCustomer.jsp" />
-        
+        <jsp:include page="components/headerCustomer.jsp">
+            <jsp:param name="acc" value="${sessionScope.acc.user}"/>
+        </jsp:include>
         <br>
         <br>
         <div class="row">
@@ -71,7 +72,7 @@
 
             <div class="col-md-9 col-sm-9">
                 <div class="row" id="content">
-                        <!--List Product-->
+                    <!--List Product-->
                     <c:forEach items="${listP}" var="o">
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="card" id="product"> <!--class="card"-->
@@ -90,25 +91,25 @@
                         </div>
                     </c:forEach>
                 </div>
-                </div>
+            </div>
 
-                <div class="clearfix">
-                    <div class="hint-text">Showing <b>6</b> out of <b>22</b> entries</div>
-                    <ul class="pagination pagination-circle">
-                        <li class="page-item paging active"><a onclick="load(this, 1, 2)" class="page-link">1</a></li>
+            <div class="clearfix">
+                <div class="hint-text">Showing <b>6</b> out of <b>22</b> entries</div>
+                <ul class="pagination pagination-circle">
+                    <li class="page-item paging active"><a onclick="load(this, 1, 2)" class="page-link">1</a></li>
 
-                        <li class="page-item paging"><a onclick="load(this, 2, 2)" class="page-link">2</a></li>
-
-
-                        <li class="page-item paging"><a onclick="load(this, 3, 2)" class="page-link">3</a></li>
+                    <li class="page-item paging"><a onclick="load(this, 2, 2)" class="page-link">2</a></li>
 
 
-                        <li class="page-item paging"><a onclick="load(this, 4, 2)" class="page-link">4</a></li>
+                    <li class="page-item paging"><a onclick="load(this, 3, 2)" class="page-link">3</a></li>
 
 
-                    </ul>
-                </div>
+                    <li class="page-item paging"><a onclick="load(this, 4, 2)" class="page-link">4</a></li>
+
+
+                </ul>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
