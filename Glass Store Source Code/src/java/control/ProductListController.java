@@ -40,10 +40,9 @@ public class ProductListController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
          ProductDAO ProductDAO = new ProductDAO();
-                ;
-                CategoryDAO CategoryDAO = new CategoryDAO();
+         CategoryDAO CategoryDAO = new CategoryDAO();
 
-                List<Category> listC = CategoryDAO.getAllCategory(); //Get List Category
+         List<Category> listC = CategoryDAO.getAllCategory(); //Get List Category
                 
 
 
@@ -78,14 +77,11 @@ public class ProductListController extends HttpServlet {
                 List<Product> list = ProductDAO.pagingByCategory(index, CID);
 
                 //Set Data to JSP
-                request.setAttribute("allCategory", listC);
+                
                 System.out.println(list);
                 request.setAttribute("listP", list); //List Product
                 request.setAttribute("end", endPage);
-                request.setAttribute("tag", index); //Page number
-                request.setAttribute("count", count);
-                request.setAttribute("CateID", CID);
-                request.setAttribute("CateName", CategoryDAO.getCateNameByID(CID));
+                
 
                 
         request.getRequestDispatcher("productList.jsp").forward(request, response);
