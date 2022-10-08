@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import util.Constants;
 
 /**
  *
@@ -22,11 +23,10 @@ public abstract class BaseDAO<T> {
     public BaseDAO()
     {
         try {
-            String user = "sa";
-            String pass = "123";
+            Constants constant = new Constants();
             String url = "jdbc:sqlserver://localhost:1433;databaseName=GlassShop";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, user, pass);
+            connection = DriverManager.getConnection(url, constant.getUSER(), constant.getPASS());
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(BaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
