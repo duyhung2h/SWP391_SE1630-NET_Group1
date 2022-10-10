@@ -142,12 +142,12 @@
                     </a>
                     <!--Add thêm code Login vao day-->
                     <ul class="navbar-nav mr-auto col-3 justify-content-end" style="margin-right: 0!important;">
-                        <c:if test="${acc == null}">
+                        <c:if test="${param.acc == null || param.acc == ''}">
                             <a class="nav-link" href="login" id="linkHover">Login</a>
                         </c:if>
-                        <c:if test = "${acc != null}">
+                        <c:if test = "${param.acc != null && param.acc != ''}">
                             <!--Link to user profile-->
-                            <a class="nav-link" href="profile" id="bell" style="font-size: 2em;"><i class="fas fa-user"></i></i></a>
+                            <a class="nav-link" href="profile" id="bell"><i class="fas fa-user"></i></i> ${param.acc}</a>
                         </c:if>
                     </ul>
                 </form>

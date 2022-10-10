@@ -15,8 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * The class contains method find update, delete, insert staff information from
+ * Staff table in database. In the update or insert method, all data will be
+ * normalized (trim space) before update/insert into database The method wil
+ * throw an object of <code>java.lang.Exception</code> class if there is any
+ * error occurring when finding, inserting, or updating data
+ * <p>
+ * Bugs: Still have some issues related to search staff by address
  *
- * @author ADMIN
+ * @author Nguyen Van Hoang
  */
 public class UserDAO extends BaseDAO<Account> {
 
@@ -348,7 +355,7 @@ public class UserDAO extends BaseDAO<Account> {
                 + "WHERE Username LIKE ?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, "%" + name + "%");            
+            ps.setString(1, "%" + name + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Account(rs.getInt(1), rs.getString(2),
@@ -363,8 +370,32 @@ public class UserDAO extends BaseDAO<Account> {
 
     public static void main(String[] args) {
         UserDAO UserDAO = new UserDAO();      
+
+        /*---------Test Case for getAllCategory() method---------*/
+//        Account acc = UserDAO.login("nguyenthegiang", "nguyenthegiang");
+//        System.out.println(acc);
+        //UserDAO.signUp("dinhthanhhoang", "dinhthanhhoang");
+//        List<Account> list = UserDAO.getAllAccounts();
+//        for (Account account : list) {
+//            System.out.println(account);
+//        }
+        //UserDAO.deleteAccount("6");
+        //UserDAO.editAccount("8", "hi", "123", "1", "0");
+        //UserDAO.deleteAccount("4");
+//        Account x = UserDAO.getAccountByID("1");
+//        System.out.println(x);
+//        UserDAO.editAccount("9", "alo", "loa", "1", "1")
+//        Account a = UserDAO.getAccountByEmail("a");
+//        System.out.println(a);
+//        System.out.println(UserDAO.countAllAccount());
+        // List<Account> list = UserDAO.searchAccountInManager("buingochuyen");
+        //  for (Account account : list) {
+        //   System.out.println(account);
+        //}
+        //System.out.println(UserDAO.checkForgetPassword("nguyenthegiang", "nguyenthe.giang.775@gmail.com"));
+        /*---------Test Case for searchAccountInManager() method---------*/
         List<Account> list = UserDAO.searchAccountInManager("giang");
-        for(Account a : list) {
+        for (Account a : list) {
             System.out.println(a);
         }
     }

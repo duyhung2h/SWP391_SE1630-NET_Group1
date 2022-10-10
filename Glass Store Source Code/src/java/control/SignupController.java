@@ -5,15 +5,19 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 23-09-2022      1.0                 HungND           First Implement
  */
-
 package control;
 
+import entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.UserDAO;
+import util.GenerateRandomString;
+import util.SendEmail;
 
 /**
  *
@@ -35,7 +39,7 @@ public class SignupController extends HttpServlet {
         try {
             response.setContentType("text/html;charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
-            
+
             System.out.println("---type---");
             String buttonType = request.getParameter("buttonType");
             System.out.println(buttonType);
@@ -55,11 +59,13 @@ public class SignupController extends HttpServlet {
                 }
             } catch (Exception e) {
             }
-            
+
             request.setAttribute("screen", "signup");
             request.getRequestDispatcher("portal.jsp").forward(request, response);
+            return;
         } catch (Exception e) {
             request.getRequestDispatcher("error.jsp").forward(request, response);
+            return;
         }
     }
 
@@ -89,6 +95,59 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        try {
+            request.setAttribute("screen", "signup");
+            HttpSession session = request.getSession();
+            UserDAO dao = new UserDAO();
+            // Normal account signup
+            // Get new user information
+            String username = request.getParameter("user");
+            String password = request.getParameter("pass");
+            String email = request.getParameter("email");
+            String repass = request.getParameter("repass");
+
+            //luu de dien lai khi chuyen ve signup.jsp
+            request.setAttribute("user", username);
+            request.setAttribute("pass", password);
+            request.setAttribute("email", email);
+            request.setAttribute("repass", repass);
+
+            String activeCode = GenerateRandomString.generateString(10);
+
+            // Check if password is confirmed
+            if (password.equals(repass)) {
+
+                // Check if email and username is not existed
+                if (dao.getAccountByEmail(email) == null
+                        && dao.getAccountByUsername(username) == null) {
+
+                    // Sign up the account
+                    dao.signUp(username, password, email, activeCode);
+                    Account newAccount = dao.getAccountByEmail(email);
+                    // Get the signed up account, put into session
+                    session.setAttribute("newAccount", newAccount);
+                    session.setAttribute("acc", newAccount);
+                    // Redirect to confirm email page
+                    response.sendRedirect("homepage");
+                    return;
+                } else {
+                    // Redirect to login page if email or user name exist
+                    request.setAttribute("mess", "Your email or username is already exist");
+                    request.getRequestDispatcher("portal.jsp").forward(request, response);
+                    return;
+                }
+            } else {
+                // Redirect to login page if password is not confirmed 
+                request.setAttribute("mess", "Password confirmation does not match your password");
+                request.getRequestDispatcher("portal.jsp").forward(request, response);
+                return;
+            }
+
+        } catch (Exception e) {
+            // Redirect to error page if exception happend
+//            response.sendRedirect("Error.jsp");
+        }
         processRequest(request, response);
     }
 

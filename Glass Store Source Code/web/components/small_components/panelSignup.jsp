@@ -10,10 +10,11 @@
     <div class="login-form">
         <form action="signup" id="sign-up-form" method="post">
             <h1 class="h3 my-5 font-weight-normal text-center"> Sign up</h1>
-            <input name="user" id="user" type="text" id="user-name" class="form-control my-4" placeholder="Username" required="" autofocus="">
-            <input name="email" id="email" type="email" id="email" class="form-control my-4" placeholder="Email" required autofocus="">
-            <input name="pass" id="pass" type="password" id="user-pass" class="form-control my-4" placeholder="Password" required autofocus="">
-            <input name="repass" id="repass" type="password" id="user-repeatpass" class="form-control my-4" placeholder="Repeat Password" required autofocus="">
+            <p class="text-danger">${mess}</p>
+            <input name="user" id="user" type="text" class="form-control my-4" placeholder="Username" required="" autofocus="" value="${user}">
+            <input name="email" id="email" type="email" class="form-control my-4" placeholder="Email" required autofocus="" value="${email}">
+            <input name="pass" id="pass" type="password" class="form-control my-4" placeholder="Password" required autofocus="" value="${pass}">
+            <input name="repass" id="repass" type="password" class="form-control my-4" placeholder="Repeat Password" required autofocus="" value="${repass}">
             <div class="form-group">
                 <label class="form-check-label">
                     <input id="check" type="checkbox" required="required"> I accept the 

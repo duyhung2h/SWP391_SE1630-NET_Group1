@@ -12,7 +12,9 @@
         <title>Homepage - Glass Store</title>
     </head>
     <body>
-        <jsp:include page="components/headerCustomer.jsp" />
+        <jsp:include page="components/headerCustomer.jsp">
+            <jsp:param name="acc" value="${sessionScope.acc.user}"/>
+        </jsp:include>
         <div class="backgrounds">
             <img src="images/glasses.jpg" style="width:100%;height: 800px">
         </div>

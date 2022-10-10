@@ -5,7 +5,6 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 04-10-2022      1.0                 TuanNA           First Implement
  */
-
 package control;
 import model.ProductDAO;
 import model.UserDAO;
@@ -27,8 +26,15 @@ import model.NotificationDAO;
 import model.OrderDAO;
 
 /**
+ * The class contains method find update, delete, insert staff information from
+ * Staff table in database. In the update or insert method, all data will be
+ * normalized (trim space) before update/insert into database The method wil
+ * throw an object of <code>java.lang.Exception</code> class if there is any
+ * error occurring when finding, inserting, or updating data
+ * <p>
+ * Bugs: Still have some issues related to search staff by address
  *
- * @author admin
+ * @author Nguyen Van Hoang
  */
 public class DashBoardController extends HttpServlet {
 
@@ -116,7 +122,6 @@ public class DashBoardController extends HttpServlet {
     }
     
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

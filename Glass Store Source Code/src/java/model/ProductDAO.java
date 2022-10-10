@@ -40,6 +40,10 @@ public class ProductDAO extends BaseDAO<Product> {
         return list;
     }
 
+    /**
+     *
+     * @return Product with the highest sold amount
+     */
     public Product getHotProduct() {
         //Product with most amount
 
@@ -74,6 +78,32 @@ public class ProductDAO extends BaseDAO<Product> {
         return null;
     }
 
+    /**
+     * each seller will have a different ID, so they will have different
+     * products
+     *
+     * @param id
+     * @return the list of products of a particular seller
+     */
+    public List<Product> getProductBySellID(int id) { //Must be int type because when saving to Session, it is still int
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT * FROM Product WHERE SellerID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    /**
+     *
+     * @return the total number of products
+     */
     public int countProduct() {
         String query = "SELECT COUNT(*) FROM Product";
         try {
@@ -87,6 +117,70 @@ public class ProductDAO extends BaseDAO<Product> {
         return 0;
     }
 
+    /**
+     * Every 6 products will be displayed in a single page
+     *
+     * @param index
+     * @return list of 6 products
+     */
+    public List<Product> pagingProduct(int index) {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT * FROM Product ORDER BY ProductID OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (index - 1) * 6);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    /**
+     * categorizing products
+     *
+     * @param index
+     * @param CategoryID
+     * @return list of products with same category
+     */
+    public List<Product> pagingByCategory(int index, int CategoryID) {
+        List<Product> list = new ArrayList<>();
+        if (CategoryID == 0) {
+            list = pagingProduct(index);
+        } else {
+            String query = "SELECT * FROM Product WHERE CategoryID = ? ORDER BY ProductID OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY";
+            try {
+                ps = connection.prepareStatement(query);
+                ps.setInt(1, CategoryID);
+                ps.setInt(2, (index - 1) * 6);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+                }
+            } catch (Exception e) {
+            }
+        }
+        return list;
+    }
+
+//    public List<Product> searchProductInManager(int SellerID, String name) {
+//        List<Product> list = new ArrayList<>();
+//        String query = "select * from Product\n"
+//                + "where SellerID = ? and ProductName like ?";
+//        try {
+//            ps = connection.prepareStatement(query);
+//            ps.setInt(1, SellerID);
+//            ps.setString(2, "%" + name + "%");
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                list.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
+//            }
+//        } catch (Exception e) {
+//        }
+//        return list;
+//    }
     //count total product
     public int countProductByCategory(int CategoryID) {
         if (CategoryID == 0) {
@@ -106,24 +200,27 @@ public class ProductDAO extends BaseDAO<Product> {
         return 0;
     }
 
-    /**
-     * Showing list of products with input category id
-     *
-     * @param id
-     * @return list of products with category Id
-     */
-    public List<Product> getProductsByCateId(int id) { //Must be int type because when saving to Session, it is still int
+    public List<Product> countProductByCategory() {
         List<Product> list = new ArrayList<>();
-        String query = "SELECT * FROM Product WHERE CategoryId = ?";
+        String query = "SELECT COUNT(*) AS Amount, Category.CategoryName\n"
+                + "FROM Product \n"
+                + "INNER JOIN Category\n"
+                + "ON Product.CategoryID = Category.CategoryID\n"
+                + "GROUP BY Product.CategoryID, Category.CategoryName";
         try {
-            ps = connection.prepareStatement(query);
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
+            ps = connection.prepareStatement(query);//Throw the query to the SQL server 
+            rs = ps.executeQuery();//Run the query, get the results returned
+
+            //Now, the command has been run, rs is the Result version -> Now have to get the data from the rs table and put it in the List
             while (rs.next()) {
-                list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
+                Product p = new Product();
+                p.setId(rs.getInt("amount"));
+                p.setName(rs.getString("CategoryName"));
+                list.add(p);
             }
         } catch (Exception e) {
         }
+
         return list;
     }
 
@@ -149,6 +246,7 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return null;
     }
+
     /**
      * Select top 3 most sold products
      *
@@ -186,57 +284,15 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return list;
     }
-    public List<Product> countProductByCategory() {
-        List<Product> list = new ArrayList<>();
-        String query = "SELECT COUNT(*) AS Amount, Category.CategoryName\n"
-                + "FROM Product \n"
-                + "INNER JOIN Category\n"
-                + "ON Product.CategoryID = Category.CategoryID\n"
-                + "GROUP BY Product.CategoryID, Category.CategoryName";
-        try {
-            ps = connection.prepareStatement(query);//Throw the query to the SQL server 
-            rs = ps.executeQuery();//Run the query, get the results returned
 
-            //Now, the command has been run, rs is the Result version -> Now have to get the data from the rs table and put it in the List
-            while (rs.next()) {
-                Product p = new Product();
-                p.setId(rs.getInt("amount"));
-                p.setName(rs.getString("CategoryName"));
-                list.add(p);
-            }
-        } catch (Exception e) {
-        }
-
-        return list;
-    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
 
         /*---------Test Case for getRelatedProduct() method---------*/
-//        List<Product> list = dao.getAllProduct();
+//        List<Product> list = dao.getRelatedProduct(1);
 //        for (Product o : list) {
-//            System.out.println(o.toString());
-//        }
-        /*---------Test Case for getHotProduct() method---------*/
-//        System.out.println(dao.getHotProduct());
-//      }
-
-        /*---------Test Case for getFavoriteProduct() method---------*/
-//        System.out.println(dao.getFavoriteProduct());
-//      }
-
-        /*---------Test Case for countProductByCategory() method---------*/
-//        System.out.println(dao.countProductByCategory(1));
-
-        /*---------Test Case for getProductBySellID() method---------*/
-//        List<Product> list = dao.getProductsByCateId(2);
-//        for (Product product : list) {
-//            System.out.println(product);
-//        }
-
-        /*---------Test Case for getProductDetailByID() method---------*/
-        System.out.println(dao.getProductDetailByID("1"));
-
+//            System.out.println(o);
     }
+
 }

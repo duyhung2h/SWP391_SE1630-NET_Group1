@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author ADMIN
+ * @author dell
  */
 public class CategoryDAO extends BaseDAO<Category> {
 
@@ -36,6 +36,11 @@ public class CategoryDAO extends BaseDAO<Category> {
         return list;
     }
 
+        /**
+     * Select a specified category by its ID, used for categorizing products in homepage
+     * @param id
+     * @return 
+     */
     public String getCateNameByID(int id) {
         String query = "SELECT CategoryName FROM Category\n"
                 + "WHERE CategoryID = ?"; 
