@@ -31,7 +31,7 @@
     <body>
         <div class="col-md-2" style="background-color: #ebebf2">
             <nav class="navbar navbar-expand-lg navbar-light flex-column">
-                <a class="navbar-brand" href="dashBoard"><img src="../images/Logo.png" width="200px"></a>
+                <a class="navbar-brand" href="dashboard"><img src="../images/Logo.png" width="200px"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -54,8 +54,7 @@
 
                         <c:if test="${sessionScope.acc.isSell == 1}">
                             <li class="nav-item">
-                                <a class="nav-link" href="manager"><i class="fas fa-tasks"></i>Manager Product</a>
-                                <a class="nav-link" href="blogManager"><i class="fas fa-tasks"></i>Manager Blog</a>
+                                <a class="nav-link" href="manage-product"><i class="fas fa-tasks"></i>Manager Product</a>
                                 <a class="nav-link" href="manage-feedback"><i class="fas fa-tasks"></i>Manage Feedback</a>
                                 <hr class="line">
                             </li> 
@@ -63,7 +62,7 @@
 
                         <c:if test="${sessionScope.acc.isAdmin == 1}">
                             <li class="nav-item">
-                                <a class="nav-link" href="accountManager"><i class="fas fa-tasks"></i>Manager Account</a>
+                                <a class="nav-link" href="account-management"><i class="fas fa-tasks"></i>Manager Account</a>
                                 <hr class="line">
                             </li> 
                         </c:if>
