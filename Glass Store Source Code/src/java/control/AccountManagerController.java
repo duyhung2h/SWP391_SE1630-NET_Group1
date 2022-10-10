@@ -23,7 +23,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author ADMIN
  */
-@WebServlet(name = "AccountManagerController", urlPatterns = {"/accountManager"})
 public class AccountManagerController extends HttpServlet {
 
     /**

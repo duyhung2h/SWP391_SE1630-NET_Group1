@@ -43,13 +43,13 @@
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-12">
-                                        <a href="accountManager" style="text-decoration: none;"><img src="images/AccountDashboard.jpg" alt="" id="headerImage" width="250px"/></a>
+                                        <a href="account-management" style="text-decoration: none;"><img src="images/AccountDashboard.jpg" alt="" id="headerImage" width="250px"/></a>
                                     </div>
                                     <div class="col-md-12" id="dashboardCard">
                                         <div class="card-body">
-                                            <a href="accountManager" style="text-decoration: none;"><h5 class="card-title" id="total">Total Accounts</h5></a>
-                                            <a href="accountManager" style="text-decoration: none;"><h5 class="card-title" id="amount">${totalAccount}</h5></a>
-                                            <a href="accountManager" style="text-decoration: none;"><p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p></a>
+                                            <a href="account-management" style="text-decoration: none;"><h5 class="card-title" id="total">Total Accounts</h5></a>
+                                            <a href="account-management" style="text-decoration: none;"><h5 class="card-title" id="amount">${totalAccount}</h5></a>
+                                            <a href="account-management" style="text-decoration: none;"><p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p></a>
                                         </div>
                                     </div>
                                 </div>
@@ -87,10 +87,10 @@
                                         </div>
                                     </c:if>
                                     <c:if test="${sessionScope.acc.isAdmin != 1}">
-                                        <div class="col-md-12">
+                                        <div class="col-md-12" id="dashboardCard">
                                             <div class="card-body">
-                                                <a style="text-decoration: none;" href ="viewInvoiceDetailAdmin?sellerId=${sessionScope.acc.id}&orderId=1"><h5 class="card-title">Total Invoices</h5></a>
-                                                <a style="text-decoration: none;" href ="viewInvoiceDetailAdmin?sellerId=${sessionScope.acc.id}&orderId=1"><h5 class="card-title">${totalCart}</h5></a>
+                                                <a style="text-decoration: none;" href ="viewInvoiceDetailAdmin?sellerId=${sessionScope.acc.id}&orderId=1"><h5 class="card-title" id="total">Total Invoices</h5></a>
+                                                <a style="text-decoration: none;" href ="viewInvoiceDetailAdmin?sellerId=${sessionScope.acc.id}&orderId=1"><h5 class="card-title" id="amount">${totalCart}</h5></a>
                                                 <a style="text-decoration: none;" href ="viewInvoiceDetailAdmin?sellerId=${sessionScope.acc.id}&orderId=1"><p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p></a>
                                             </div>
                                         </div>
