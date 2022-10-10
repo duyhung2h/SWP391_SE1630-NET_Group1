@@ -62,7 +62,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AccountManagerController</servlet-name>
-        <url-pattern>/accountManager</url-pattern>
+        <url-pattern>/account-management</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

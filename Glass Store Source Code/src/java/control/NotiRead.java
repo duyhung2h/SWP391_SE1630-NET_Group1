@@ -1,29 +1,25 @@
 /*
- * Copyright(C) 2022, GROUP 1 SWP391 SE1630-NET
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 04-10-2022      1.0                 TuanNA           First Implement
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 package control;
-import entity.*;
-import model.*;
+
+import model.NotificationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author ADMIN
+ * @author Thuan
  */
-public class AccountManagerController extends HttpServlet {
+@WebServlet(name = "NotiRead", urlPatterns = {"/notiRead"})
+public class NotiRead extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,19 +33,15 @@ public class AccountManagerController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        try {
-            UserDAO userDAO = new UserDAO();
-            List<Account> listAccount = userDAO.getAllAccounts();
-
-            //Set data to JSP
-            request.setAttribute("list", listAccount);
-            request.getRequestDispatcher("accountManager.jsp").forward(request, response);
-        } catch (Exception e) {
+        try{
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        NotificationDAO notiDAO = new NotificationDAO();
+        notiDAO.read(userId);
+        }
+        catch(Exception e ){
             response.sendRedirect("Error.jsp");
         }
-        //Get data from DAO
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

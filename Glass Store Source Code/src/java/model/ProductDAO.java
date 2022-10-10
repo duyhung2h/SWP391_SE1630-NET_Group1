@@ -1,8 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, GROUP 1 SWP391 SE1630-NET
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 01-10-2022      1.0                 MinhVH           First Implement
  */
+
 package model;
 
 import entity.*;
@@ -19,7 +22,8 @@ import java.util.List;
  * @author dell
  */
 public class ProductDAO extends BaseDAO<Product> {
-PreparedStatement ps = null; //...
+
+    PreparedStatement ps = null; //...
     ResultSet rs = null; //Get the results returned
 
     public List<Product> getAllProduct() {
@@ -99,8 +103,6 @@ PreparedStatement ps = null; //...
         return list;
     }
 
-
-
     /**
      *
      * @return the total number of products
@@ -166,8 +168,6 @@ PreparedStatement ps = null; //...
         return list;
     }
 
-
-
 //    public List<Product> searchProductInManager(int SellerID, String name) {
 //        List<Product> list = new ArrayList<>();
 //        String query = "select * from Product\n"
@@ -203,10 +203,6 @@ PreparedStatement ps = null; //...
         return 0;
     }
 
-
-
-
-
     public List<Product> countProductByCategory() {
         List<Product> list = new ArrayList<>();
         String query = "SELECT COUNT(*) AS Amount, Category.CategoryName\n"
@@ -231,19 +227,75 @@ PreparedStatement ps = null; //...
         return list;
     }
 
+    //Get Product for Detail
+    public ProductDetail getProductDetailByID(String id) { //Must be int type because when saving to Session, it is still int
+        String query = "SELECT * \n"
+                + "FROM Product INNER JOIN Manufacturer\n"
+                + "ON Product.ManufacturerID = Manufacturer.ManufacturerID\n"
+                + "WHERE ProductID = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return (new ProductDetail(rs.getInt("ProductID"),
+                        rs.getString("ProductName"),
+                        rs.getString("Description"),
+                        rs.getInt("SellPrice"),
+                        rs.getString("imageLink"),
+                        rs.getString("ManufacturerName")));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
- 
+    /**
+     * Select top 3 most sold products
+     *
+     * @return products
+     */
+    public List<ProductInManager> top3MostSell() {
+        List<ProductInManager> list = new ArrayList<>();
+        String query = "SELECT TOP 3 * FROM Product ORDER BY Amount ASC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    /**
+     * select top 3 least sold products
+     *
+     * @return products
+     */
+    public List<ProductInManager> top3LeastSell() {
+        List<ProductInManager> list = new ArrayList<>();
+        String query = "SELECT TOP 3 * FROM Product ORDER BY Amount DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        
+
         /*---------Test Case for getRelatedProduct() method---------*/
 //        List<Product> list = dao.getRelatedProduct(1);
 //        for (Product o : list) {
 //            System.out.println(o);
-        }
+    }
 
-    
-    
-    
 }

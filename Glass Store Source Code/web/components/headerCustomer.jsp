@@ -123,7 +123,7 @@
                         <!--Ki?m tra xem có ph?i admin ko: isAdmin == 1-->
                         <c:if test="${acc.isAdmin == 1}">
                             <li class="nav-item">
-                                <a class="nav-link" href="accountManager" id="linkHover">Manager Account</a>
+                                <a class="nav-link" href="account-management" id="linkHover">Manager Account</a>
                             </li> 
                         </c:if>
                         <li class="nav-item">
