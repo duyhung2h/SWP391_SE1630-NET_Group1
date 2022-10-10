@@ -1,8 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, GROUP 1 SWP391 SE1630-NET
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 01-10-2022      1.0                 TuanNA           First Implement
  */
+
 package model;
 
 import entity.Account;
@@ -370,33 +373,5 @@ public class UserDAO extends BaseDAO<Account> {
 
     public static void main(String[] args) {
         UserDAO UserDAO = new UserDAO();      
-
-        /*---------Test Case for getAllCategory() method---------*/
-//        Account acc = UserDAO.login("nguyenthegiang", "nguyenthegiang");
-//        System.out.println(acc);
-        //UserDAO.signUp("dinhthanhhoang", "dinhthanhhoang");
-//        List<Account> list = UserDAO.getAllAccounts();
-//        for (Account account : list) {
-//            System.out.println(account);
-//        }
-        //UserDAO.deleteAccount("6");
-        //UserDAO.editAccount("8", "hi", "123", "1", "0");
-        //UserDAO.deleteAccount("4");
-//        Account x = UserDAO.getAccountByID("1");
-//        System.out.println(x);
-//        UserDAO.editAccount("9", "alo", "loa", "1", "1")
-//        Account a = UserDAO.getAccountByEmail("a");
-//        System.out.println(a);
-//        System.out.println(UserDAO.countAllAccount());
-        // List<Account> list = UserDAO.searchAccountInManager("buingochuyen");
-        //  for (Account account : list) {
-        //   System.out.println(account);
-        //}
-        //System.out.println(UserDAO.checkForgetPassword("nguyenthegiang", "nguyenthe.giang.775@gmail.com"));
-        /*---------Test Case for searchAccountInManager() method---------*/
-        List<Account> list = UserDAO.searchAccountInManager("giang");
-        for (Account a : list) {
-            System.out.println(a);
-        }
     }
 }
