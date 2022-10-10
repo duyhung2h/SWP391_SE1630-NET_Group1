@@ -23,8 +23,6 @@
                         <jsp:include page="small_components/panelSignup.jsp"/>
                     </c:if>
                     <br>
-                    <fb:login-button style="margin-left:45%;" scope="public_profile,email" onlogin="checkLoginState();">
-                    </fb:login-button>
                     <div id="status">
                     </div>
 
