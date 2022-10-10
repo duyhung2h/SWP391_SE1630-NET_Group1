@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Load du lieu tu SQL Server
  *
- * @author ADMIN
+ * @author dell
  */
 public class ProductDAO extends BaseDAO<Product> {
 PreparedStatement ps = null; //...
