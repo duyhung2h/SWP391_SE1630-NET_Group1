@@ -149,6 +149,66 @@ public class ProductDAO extends BaseDAO<Product> {
         }
         return null;
     }
+    /**
+     * Select top 3 most sold products
+     *
+     * @return products
+     */
+    public List<ProductInManager> top3MostSell() {
+        List<ProductInManager> list = new ArrayList<>();
+        String query = "SELECT TOP 3 * FROM Product ORDER BY Amount ASC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    /**
+     * select top 3 least sold products
+     *
+     * @return products
+     */
+    public List<ProductInManager> top3LeastSell() {
+        List<ProductInManager> list = new ArrayList<>();
+        String query = "SELECT TOP 3 * FROM Product ORDER BY Amount DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    public List<Product> countProductByCategory() {
+        List<Product> list = new ArrayList<>();
+        String query = "SELECT COUNT(*) AS Amount, Category.CategoryName\n"
+                + "FROM Product \n"
+                + "INNER JOIN Category\n"
+                + "ON Product.CategoryID = Category.CategoryID\n"
+                + "GROUP BY Product.CategoryID, Category.CategoryName";
+        try {
+            ps = connection.prepareStatement(query);//Throw the query to the SQL server 
+            rs = ps.executeQuery();//Run the query, get the results returned
+
+            //Now, the command has been run, rs is the Result version -> Now have to get the data from the rs table and put it in the List
+            while (rs.next()) {
+                Product p = new Product();
+                p.setId(rs.getInt("amount"));
+                p.setName(rs.getString("CategoryName"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();

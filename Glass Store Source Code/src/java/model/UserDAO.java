@@ -362,32 +362,7 @@ public class UserDAO extends BaseDAO<Account> {
     }
 
     public static void main(String[] args) {
-        UserDAO UserDAO = new UserDAO();
-
-        /*---------Test Case for getAllCategory() method---------*/
-//        Account acc = UserDAO.login("nguyenthegiang", "nguyenthegiang");
-//        System.out.println(acc);
-        //UserDAO.signUp("dinhthanhhoang", "dinhthanhhoang");
-//        List<Account> list = UserDAO.getAllAccounts();
-//        for (Account account : list) {
-//            System.out.println(account);
-//        }
-        //UserDAO.deleteAccount("6");
-        //UserDAO.editAccount("8", "hi", "123", "1", "0");
-        //UserDAO.deleteAccount("4");
-//        Account x = UserDAO.getAccountByID("1");
-//        System.out.println(x);
-//        UserDAO.editAccount("9", "alo", "loa", "1", "1")
-//        Account a = UserDAO.getAccountByEmail("a");
-//        System.out.println(a);
-//        System.out.println(UserDAO.countAllAccount());
-        // List<Account> list = UserDAO.searchAccountInManager("buingochuyen");
-        //  for (Account account : list) {
-        //   System.out.println(account);
-        //}
-        //System.out.println(UserDAO.checkForgetPassword("nguyenthegiang", "nguyenthe.giang.775@gmail.com"));
-        
-        /*---------Test Case for searchAccountInManager() method---------*/
+        UserDAO UserDAO = new UserDAO();      
         List<Account> list = UserDAO.searchAccountInManager("giang");
         for(Account a : list) {
             System.out.println(a);
