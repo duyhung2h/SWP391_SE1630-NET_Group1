@@ -25,7 +25,7 @@ package util;
 public class Constants {
 
     private String USER = "sa";
-    private String PASS = "aladanh";
+    private String PASS = "123";
 
     public Constants() {
     }
