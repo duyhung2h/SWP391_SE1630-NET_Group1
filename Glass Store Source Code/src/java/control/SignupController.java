@@ -64,8 +64,7 @@ public class SignupController extends HttpServlet {
             request.getRequestDispatcher("portal.jsp").forward(request, response);
             return;
         } catch (Exception e) {
-            request.getRequestDispatcher("error.jsp").forward(request, response);
-            return;
+        } finally {
         }
     }
 
@@ -95,7 +94,8 @@ public class SignupController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        // Kiem tra xem co dang thuc hien lenh dang ky hay khong
         try {
             request.setAttribute("screen", "signup");
             HttpSession session = request.getSession();
@@ -130,25 +130,24 @@ public class SignupController extends HttpServlet {
                     session.setAttribute("acc", newAccount);
                     // Redirect to confirm email page
                     response.sendRedirect("homepage");
-                    return;
                 } else {
                     // Redirect to login page if email or user name exist
                     request.setAttribute("mess", "Your email or username is already exist");
                     request.getRequestDispatcher("portal.jsp").forward(request, response);
-                    return;
                 }
             } else {
                 // Redirect to login page if password is not confirmed 
                 request.setAttribute("mess", "Password confirmation does not match your password");
                 request.getRequestDispatcher("portal.jsp").forward(request, response);
-                return;
             }
 
         } catch (Exception e) {
             // Redirect to error page if exception happend
-//            response.sendRedirect("Error.jsp");
+            System.out.println(e);
+//            throw e;
+        } finally {
+            processRequest(request, response);
         }
-        processRequest(request, response);
     }
 
     /**
