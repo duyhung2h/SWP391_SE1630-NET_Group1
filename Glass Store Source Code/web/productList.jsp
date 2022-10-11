@@ -83,6 +83,7 @@
                                     <h4 class="card-title show_txt"><a href="detail?ProductID=${o.id}" title="View Product">${o.name}</a></h4>
                                     <div class="row">
                                         <div class="col">
+                                            <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=${o.id}"><p class="btn btn-warning btn-block">Add to Cart</p></a>
                                             <a onmouseover="this.style.textDecoration = 'none';" href="compare?id=${o.id}"><p class="btn btn-warning btn-block">Add to Compare</p></a>
                                         </div>
                                     </div>

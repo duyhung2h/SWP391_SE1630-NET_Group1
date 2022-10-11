@@ -168,22 +168,6 @@ public class ProductDAO extends BaseDAO<Product> {
         return list;
     }
 
-//    public List<Product> searchProductInManager(int SellerID, String name) {
-//        List<Product> list = new ArrayList<>();
-//        String query = "select * from Product\n"
-//                + "where SellerID = ? and ProductName like ?";
-//        try {
-//            ps = connection.prepareStatement(query);
-//            ps.setInt(1, SellerID);
-//            ps.setString(2, "%" + name + "%");
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
-//            }
-//        } catch (Exception e) {
-//        }
-//        return list;
-//    }
     //count total product
     public int countProductByCategory(int CategoryID) {
         if (CategoryID == 0) {
@@ -292,10 +276,53 @@ public class ProductDAO extends BaseDAO<Product> {
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
 
-        /*---------Test Case for getRelatedProduct() method---------*/
-//        List<Product> list = dao.getRelatedProduct(1);
+        /*---------Test Case for getAllProduct() method---------*/
+//        List<Product> list = dao.getAllProduct();
 //        for (Product o : list) {
 //            System.out.println(o);
+//        }
+
+        /*---------Test Case for getHotProduct() method---------*/
+//        System.out.println(dao.getHotProduct());
+
+        /*---------Test Case for getProductBySellID() method---------*/
+//        List<Product> list = dao.getProductBySellID(1);
+//        for (Product product : list) {
+//            System.out.println(product);
+//        }
+
+        /*---------Test Case for countProduct() method---------*/
+//        System.out.println(dao.countProduct());
+
+        /*---------Test Case for pagingProduct() method---------*/
+//        List<Product> list = dao.pagingProduct(1);
+//        for (Product o : list) {
+//            System.out.println(o);
+//        }
+
+        /*---------Test Case for pagingByCategory() method---------*/
+//        List<Product> list = dao.pagingByCategory(1, 1);
+//        for (Product o : list) {
+//            System.out.println(o);
+//        }
+
+        /*---------Test Case for countProductByCategory() method---------*/
+//        System.out.println(dao.countProductByCategory(1));
+
+        /*---------Test Case for getProductDetailByID() method---------*/
+//        System.out.println(dao.getProductDetailByID("1"));
+
+        /*---------Test Case for top3MostSell() method---------*/
+//        List<ProductInManager> list = dao.top3MostSell();
+//        for (ProductInManager productInManager : list) {
+//            System.out.println(productInManager);
+//        }
+
+        /*---------Test Case for top3LeastSell() method---------*/
+//        List<ProductInManager> list = dao.top3LeastSell();
+//        for (ProductInManager productInManager : list) {
+//            System.out.println(productInManager);
+//        }
     }
 
 }
