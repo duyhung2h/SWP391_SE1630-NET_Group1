@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class ProductDAO extends BaseDAO<Product> {
 
-
     PreparedStatement ps = null; //...
     ResultSet rs = null; //Get the results returned
 

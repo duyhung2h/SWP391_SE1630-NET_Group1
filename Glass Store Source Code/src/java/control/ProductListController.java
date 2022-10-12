@@ -8,7 +8,10 @@
 
 package control;
 
+import entity.Account;
 import entity.Category;
+import entity.Information;
+import entity.Notification;
 import entity.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.CategoryDAO;
 import model.ProductDAO;
 
@@ -37,13 +41,21 @@ public class ProductListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        
+            //Call to DAOs
 
-         ProductDAO ProductDAO = new ProductDAO();
-         CategoryDAO CategoryDAO = new CategoryDAO();
+            HttpSession session = request.getSession();
+            if (session.getAttribute("acc") == null) {
+                ProductDAO ProductDAO = new ProductDAO();
+               // InforDAO InforDAO = new InforDAO();
+                CategoryDAO CategoryDAO = new CategoryDAO();
 
-         List<Category> listC = CategoryDAO.getAllCategory(); //Get List Category
-                
+                List<Category> listC = CategoryDAO.getAllCategory(); //Get List Category
+                Product hot = ProductDAO.getHotProduct(); //Get First Product
+                Product favor = ProductDAO.getFavoriteProduct(); //Get Last Product
+        
 
 
                 //Paging By CategoryID
@@ -77,16 +89,22 @@ public class ProductListController extends HttpServlet {
                 List<Product> list = ProductDAO.pagingByCategory(index, CID);
 
                 //Set Data to JSP
-                
-                System.out.println(list);
+                request.setAttribute("allCategory", listC);
+                request.setAttribute("hot", hot);
+                request.setAttribute("favor", favor);
+            
+
                 request.setAttribute("listP", list); //List Product
                 request.setAttribute("end", endPage);
-                
+                request.setAttribute("tag", index); //Page number
+                request.setAttribute("count", count);
+                request.setAttribute("CateID", CID);
+                request.setAttribute("CateName", CategoryDAO.getCateNameByID(CID));
 
-                
-        request.getRequestDispatcher("productList.jsp").forward(request, response);
+                request.getRequestDispatcher("productList.jsp").forward(request, response);
+            
 
-    }
+    }}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
