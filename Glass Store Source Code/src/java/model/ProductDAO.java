@@ -50,7 +50,7 @@ public class ProductDAO extends BaseDAO<Product> {
 
         String query = "SELECT TOP 1 * FROM Product ORDER BY Amount DESC";
         try {
-            ps = connection.prepareStatement(query);
+            ps = connection.prepareStatement(query);      
             rs = ps.executeQuery();
             while (rs.next()) {
                 return new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"));

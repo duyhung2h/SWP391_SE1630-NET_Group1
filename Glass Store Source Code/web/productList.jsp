@@ -17,38 +17,14 @@
                 <div class="card bg-light mb-3">
                     <div class="card-header bg-info text-white text-uppercase"><i class="fa fa-list" aria-hidden="true"></i> Categories</div>
                     <ul class="list-group category_block">
-
-                        <!--Category nao dang dc chon thi se noi bat-->
-                        <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=1"> Kính Cận</a>
+                        <c:forEach items="${allCategory}" var="item">
+                            <li class="list-group-item text-white ">
+                            <a href="products?CategoryID=${item.id}">${item.name}</a>
                         </li>
-
-                        <li class="list-group-item text-white active">
-                            <a href="products?CategoryID=2"> Kính Râm Thời Trang</a>
-                        </li>
-
-                        <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=3"> Kính Áp Tròng</a>
-                        </li>
-
-                        <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=4"> Kính Lão-Viễn</a>
-                        </li>
-
-                        <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=5"> Gọng Kính</a>
-                        </li>
-
-                        <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=6"> Mắt Kính</a>
-                        </li>
-
-                        <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=7"> Kính Bơi</a>
-                        </li>
-
+                        </c:forEach>
                     </ul>
                 </div>
+                
                 <div class="card bg-light mb-3">
                     <div class="card-header bg-info text-white text-uppercase">HOT product</div>
                     <div class="card-body">
