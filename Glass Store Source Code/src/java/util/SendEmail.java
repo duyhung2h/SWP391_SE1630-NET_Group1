@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, GROUP 1 SWP391 SE1630-NET
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 23-09-2022      1.0                 HungND           First Implement
  */
+
 package util;
 
-/**
- *
- * @author TRANTATDAT
- */
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -19,6 +18,21 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * SendEmail.java
+ *
+ * Lớp này có...
+ *
+ * Thực hiện chức năng:
+ *
+ * Các phương thức sẽ trả về một đối tượng của lớp
+ * <code>java.lang.Exception</code> khi có bất cứ lỗi nào xảy ra trong quá trình
+ * truy vấn, cập nhật dữ liệu.
+ * <p>
+ * Bugs: ...	</p>
+ *
+ * @author Admin
+ */
 public class SendEmail {
 
     // Email destination, subject, message

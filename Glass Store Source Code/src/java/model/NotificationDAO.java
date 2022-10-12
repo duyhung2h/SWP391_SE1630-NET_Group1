@@ -5,12 +5,9 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 01-10-2022      1.0                 AnhLH           First Implement
  */
-
 package model;
 
-import control.NotiRead;
 import entity.Notification;
-import entity.OrderDetail;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
@@ -24,14 +21,14 @@ import java.util.List;
  */
 public class NotificationDAO extends BaseDAO<Notification> {
 
-    PreparedStatement ps = null; //...
-    ResultSet rs = null; //Nhận kết quả trả về
+    PreparedStatement ps = null; // ...
+    ResultSet rs = null; // Nhận kết quả trả về
 
     /**
      * Adding a notification to a particular user by their ID that their order
      * has been approved
      *
-     * @param userID: the user's ID
+     * @param userID:  the user's ID
      * @param orderId: the order which related to the notification
      */
     public void approveOrderAdminNoti(int userID, int orderId) {
@@ -44,7 +41,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         try {
 
             ps = connection.prepareStatement(query);
-            //Set data to the ?
+            // Set data to the ?
             ps.setInt(1, userID);
             ps.setInt(2, orderId);
             ps.setString(3, "Your order with ID " + orderId + " has been approved, now being packaged"
@@ -53,16 +50,20 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
             ps.executeUpdate();
         } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+
         }
     }
-    
+
     /**
-     * send a notification to admin only, that the customer with userId has received
-     * their order successfully
-     * @param userID: id of the customer
+     * send a notification to admin only, that the customer with userId has
+     * received their order successfully
+     *
+     * @param userID:  id of the customer
      * @param orderId: id of the order of the customer
      */
-     public void finishOrderUserNoti(int userID, int orderId) {
+    public void finishOrderUserNoti(int userID, int orderId) {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH:mm");
@@ -72,10 +73,10 @@ public class NotificationDAO extends BaseDAO<Notification> {
         try {
 
             ps = connection.prepareStatement(query);
-            //Set data to the ?
+            // Set data to the ?
             ps.setInt(1, 1);
             ps.setInt(2, orderId);
-            ps.setString(3, "Your customer with ID: "+ userID +" has successfully "
+            ps.setString(3, "Your customer with ID: " + userID + " has successfully "
                     + "received the order with ID: "
                     + orderId + ". Check it out!");
             ps.setString(4, "unread");
@@ -84,13 +85,14 @@ public class NotificationDAO extends BaseDAO<Notification> {
         } catch (Exception e) {
         }
     }
-    
-     /**
-      * send a notification to the customer with specified id that their 
-      * order has been packaged and now being delivered
-      * @param userID: customer id
-      * @param orderId: their order id
-      */
+
+    /**
+     * send a notification to the customer with specified id that their order
+     * has been packaged and now being delivered
+     *
+     * @param userID:  customer id
+     * @param orderId: their order id
+     */
     public void deliverOrderAdminNoti(int userID, int orderId) {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -101,7 +103,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         try {
 
             ps = connection.prepareStatement(query);
-            //Set data to the ?
+            // Set data to the ?
             ps.setInt(1, userID);
             ps.setInt(2, orderId);
             ps.setString(3, "Your order with ID " + orderId + " has been packaged, now being delivered"
@@ -115,10 +117,11 @@ public class NotificationDAO extends BaseDAO<Notification> {
 
     /**
      * Inform to the seller and admin that the order has been paid successfully!
-     * @param userId: id of the buyer
+     *
+     * @param userId         id of the buyer
      * @param orderId
      * @param adminSellerId: id of admin and the seller of the product
-     * @throws Exception 
+     * @throws Exception
      */
     public void userReceivedOrderNoti(int userId, int orderId, List<Integer> adminSellerId)
             throws Exception {
@@ -145,12 +148,23 @@ public class NotificationDAO extends BaseDAO<Notification> {
                 ps.setString(4, "unread");
                 ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
 
-                ps.execute();           // the INSERT happens here
+                ps.execute(); // the INSERT happens here
             }
-        } catch (Exception se) {
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+
         }
     }
-    
+
+    /**
+     * Inform customer through notification about their order status
+     *
+     * @param userId   id of customer
+     * @param orderId
+     * @param sellerId id of the seller of the product
+     * @throws Exception
+     */
     public void userBuyNoti(int userId, int orderId, List<Integer> sellerId)
             throws Exception {
 
@@ -172,18 +186,27 @@ public class NotificationDAO extends BaseDAO<Notification> {
                 ps.setInt(1, n);
                 ps.setInt(2, orderId);
                 ps.setString(3, "The customer with ID " + userId + " has placed an order"
-                        + " with OrderID: "+ orderId
+                        + " with OrderID: " + orderId
                         + ". Waiting for admin to approve! Check our your completed order! ");
                 ps.setString(4, "unread");
                 ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
 
-                ps.execute();           // the INSERT happens here
+                ps.execute(); // the INSERT happens here
             }
-        } catch (Exception se) {
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
         }
     }
-    
-    
+
+    /**
+     * Inform to the seller that an order has newly been made
+     *
+     * @param userId  id of the buyer
+     * @param orderId
+     * 
+     * @throws Exception
+     */
     public void userBuyNotiAdmin(int userId, int orderId)
             throws Exception {
 
@@ -201,25 +224,26 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps = connection.prepareStatement(query);
 
             // now loop through nearly 1,500 nodes in the list
-                ps.setInt(1, 1);
-                ps.setInt(2, orderId);
-                ps.setString(3, "The customer with ID " + userId + " has placed an order"
-                        + " with OrderID: "+ orderId
-                        + ". Check it out! ");
-                ps.setString(4, "unread");
-                ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
+            ps.setInt(1, 1);
+            ps.setInt(2, orderId);
+            ps.setString(3, "The customer with ID " + userId + " has placed an order"
+                    + " with OrderID: " + orderId
+                    + ". Check it out! ");
+            ps.setString(4, "unread");
+            ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
 
-                ps.execute();           // the INSERT happens here
-            
-        } catch (Exception se) {
+            ps.execute(); // the INSERT happens here
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
         }
     }
-    
 
     /**
      * Adding a notification to user by admin that their order has been canceled
      *
-     * @param userID: the user's ID
+     * @param userID:  the user's ID
      * @param orderId: the order which related to the notification
      */
     public void cancelOrderNoti(int userID, int orderId) {
@@ -231,7 +255,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         try {
 
             ps = connection.prepareStatement(query);
-            //Set data to the ?
+            // Set data to the ?
             ps.setInt(1, userID);
             ps.setInt(2, orderId);
             ps.setString(3, "Your order with ID " + orderId + " has been canceled, "
@@ -265,15 +289,14 @@ public class NotificationDAO extends BaseDAO<Notification> {
                         rs.getInt("OrderID"),
                         rs.getString("Content"),
                         rs.getString("Status"),
-                        rs.getString("Time")
-                ));
+                        rs.getString("Time")));
             }
         } catch (Exception e) {
         }
 
         return list;
     }
-    
+
     /**
      * Get all the notifications of the user
      *
@@ -296,8 +319,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
                         rs.getInt("OrderID"),
                         rs.getString("Content"),
                         rs.getString("Status"),
-                        rs.getString("Time")
-                ));
+                        rs.getString("Time")));
             }
         } catch (Exception e) {
         }
@@ -328,8 +350,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
                         rs.getInt("OrderID"),
                         rs.getString("Content"),
                         rs.getString("Status"),
-                        rs.getString("Time")
-                ));
+                        rs.getString("Time")));
             }
         } catch (Exception e) {
         }
@@ -348,20 +369,20 @@ public class NotificationDAO extends BaseDAO<Notification> {
                 + "WHERE userID = ?";
         try {
             ps = connection.prepareStatement(query);
-            //Set data to the ?
+            // Set data to the ?
             ps.setInt(1, userId);
             ps.executeUpdate();
         } catch (Exception e) {
         }
     }
-    
-    public void readOneNoti(int userId,int orderId) {
+
+    public void readOneNoti(int userId, int orderId) {
         String query = "UPDATE Notifications\n"
                 + "SET Status = 'read'\n"
                 + "WHERE userID = ? AND orderID=?";
         try {
             ps = connection.prepareStatement(query);
-            //Set data to the ?
+            // Set data to the ?
             ps.setInt(1, userId);
             ps.setInt(2, orderId);
             ps.executeUpdate();
@@ -407,8 +428,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
         }
         return 0;
     }
-    
-    
+
     public void adminApproveNotiSeller(int userId, int orderId, List<Integer> sellerId)
             throws Exception {
 
@@ -429,20 +449,19 @@ public class NotificationDAO extends BaseDAO<Notification> {
             for (Integer n : sellerId) {
                 ps.setInt(1, n);
                 ps.setInt(2, orderId);
-                ps.setString(3, "Admin has approved your product(s) from buyer with ID  " 
-                        + userId 
-                        + ", and the OrderID: "+ orderId
+                ps.setString(3, "Admin has approved your product(s) from buyer with ID  "
+                        + userId
+                        + ", and the OrderID: " + orderId
                         + ". Check it out! ");
                 ps.setString(4, "unread");
                 ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
 
-                ps.execute();           // the INSERT happens here
+                ps.execute(); // the INSERT happens here
             }
         } catch (Exception se) {
         }
     }
-    
-    
+
     public void userReceivedNotiSeller(int userId, int orderId, List<Integer> sellerId)
             throws Exception {
 
@@ -463,17 +482,16 @@ public class NotificationDAO extends BaseDAO<Notification> {
             for (Integer n : sellerId) {
                 ps.setInt(1, n);
                 ps.setInt(2, orderId);
-                ps.setString(3, "Your order from Order from buyer with ID  " 
-                        + userId 
-                        + ", and the OrderID: "+ orderId
+                ps.setString(3, "Your order from Order from buyer with ID  "
+                        + userId
+                        + ", and the OrderID: " + orderId
                         + " has been shipped successfully! Check it out! ");
                 ps.setString(4, "unread");
                 ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
 
-                ps.execute();           // the INSERT happens here
+                ps.execute(); // the INSERT happens here
             }
         } catch (Exception se) {
         }
     }
 }
-

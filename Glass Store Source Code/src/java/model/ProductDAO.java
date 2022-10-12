@@ -5,11 +5,9 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 01-10-2022      1.0                 MinhVH           First Implement
  */
-
 package model;
 
 import entity.*;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +20,7 @@ import java.util.List;
  * @author dell
  */
 public class ProductDAO extends BaseDAO<Product> {
+
 
     PreparedStatement ps = null; //...
     ResultSet rs = null; //Get the results returned

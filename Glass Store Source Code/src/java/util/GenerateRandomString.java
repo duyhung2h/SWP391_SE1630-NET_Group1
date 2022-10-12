@@ -1,16 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, GROUP 1 SWP391 SE1630-NET
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 23-09-2022      1.0                 HungND           First Implement
  */
+
 package util;
 
 import java.util.Random;
 
-/**
- *
- * @author TRANTATDAT
- */
+
 public class GenerateRandomString {
 
     /**

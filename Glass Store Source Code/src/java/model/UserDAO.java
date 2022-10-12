@@ -5,7 +5,6 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 01-10-2022      1.0                 TuanNA           First Implement
  */
-
 package model;
 
 import entity.Account;
@@ -163,8 +162,10 @@ public class UserDAO extends BaseDAO<Account> {
             ps.setString(4, id);
             ps.executeUpdate();
         } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            
         }
-        return;
     }
 
     /**
@@ -321,6 +322,8 @@ public class UserDAO extends BaseDAO<Account> {
     }
 
     /**
+     * count numbers of account
+     * 
      * @return the number of account in the database
      */
     public int countAllAccount() {
@@ -372,6 +375,6 @@ public class UserDAO extends BaseDAO<Account> {
     }
 
     public static void main(String[] args) {
-        UserDAO UserDAO = new UserDAO();      
+        UserDAO UserDAO = new UserDAO();
     }
 }

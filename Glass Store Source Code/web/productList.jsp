@@ -20,31 +20,31 @@
 
                         <!--Category nao dang dc chon thi se noi bat-->
                         <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=1"><i class="fas fa-laptop" aria-hidden="true"></i> Kính Cận</a>
+                            <a href="products?CategoryID=1"> Kính Cận</a>
                         </li>
 
                         <li class="list-group-item text-white active">
-                            <a href="products?CategoryID=2"><i class="fas fa-desktop" aria-hidden="true"></i> Kính Râm Thời Trang</a>
+                            <a href="products?CategoryID=2"> Kính Râm Thời Trang</a>
                         </li>
 
                         <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=3"><i class="far fa-folder-open" aria-hidden="true"></i> Kính Áp Tròng</a>
+                            <a href="products?CategoryID=3"> Kính Áp Tròng</a>
                         </li>
 
                         <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=4"><i class="far fa-keyboard" aria-hidden="true"></i> Kính Lão-Viễn</a>
+                            <a href="products?CategoryID=4"> Kính Lão-Viễn</a>
                         </li>
 
                         <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=5"><i class="fas fa-mobile-alt" aria-hidden="true"></i> Gọng Kính</a>
+                            <a href="products?CategoryID=5"> Gọng Kính</a>
                         </li>
 
                         <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=6"><i class="fas fa-tablet-alt" aria-hidden="true"></i> Mắt Kính</a>
+                            <a href="products?CategoryID=6"> Mắt Kính</a>
                         </li>
 
                         <li class="list-group-item text-white ">
-                            <a href="products?CategoryID=7"><i class="fas fa-headphones" aria-hidden="true"></i> Kính Bơi</a>
+                            <a href="products?CategoryID=7"> Kính Bơi</a>
                         </li>
 
                     </ul>
