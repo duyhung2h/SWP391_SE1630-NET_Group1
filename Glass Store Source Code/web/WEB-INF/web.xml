@@ -32,6 +32,10 @@
         <servlet-name>AccountManagerController</servlet-name>
         <servlet-class>control.AccountManagerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>control.LogoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>AccountManagerController</servlet-name>
         <url-pattern>/account-management</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

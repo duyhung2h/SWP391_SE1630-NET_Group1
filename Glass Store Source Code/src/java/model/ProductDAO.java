@@ -5,14 +5,11 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 01-10-2022      1.0                 MinhVH           First Implement
  */
-
 package model;
 
 import entity.*;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,12 +35,15 @@ public class ProductDAO extends BaseDAO<Product> {
                 list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
             }
         } catch (Exception e) {
-        }
+            e.printStackTrace();
+        } finally {
 
+        }
         return list;
     }
 
     /**
+     * Select products with most sold amount (in product list page)
      *
      * @return Product with the highest sold amount
      */
@@ -58,6 +58,9 @@ public class ProductDAO extends BaseDAO<Product> {
                 return new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
         return null;
     }
@@ -77,6 +80,9 @@ public class ProductDAO extends BaseDAO<Product> {
                 return new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
         return null;
     }
@@ -99,6 +105,9 @@ public class ProductDAO extends BaseDAO<Product> {
                 list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
         return list;
     }
@@ -116,6 +125,9 @@ public class ProductDAO extends BaseDAO<Product> {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
         return 0;
     }
@@ -137,6 +149,9 @@ public class ProductDAO extends BaseDAO<Product> {
                 list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
         return list;
     }
@@ -163,6 +178,9 @@ public class ProductDAO extends BaseDAO<Product> {
                     list.add(new Product(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink")));
                 }
             } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+
             }
         }
         return list;
@@ -182,6 +200,9 @@ public class ProductDAO extends BaseDAO<Product> {
                     return rs.getInt(1);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+
             }
         }
         return 0;
@@ -206,6 +227,9 @@ public class ProductDAO extends BaseDAO<Product> {
                 list.add(p);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
 
         return list;
@@ -230,6 +254,9 @@ public class ProductDAO extends BaseDAO<Product> {
                         rs.getString("ManufacturerName")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
         return null;
     }
@@ -249,6 +276,9 @@ public class ProductDAO extends BaseDAO<Product> {
                 list.add(new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
         return list;
     }
@@ -268,61 +298,15 @@ public class ProductDAO extends BaseDAO<Product> {
                 list.add(new ProductInManager(rs.getInt("ProductID"), rs.getString("ProductName"), rs.getString("Description"), rs.getInt("SellPrice"), rs.getString("imageLink"), rs.getInt("CategoryID"), rs.getInt("SellerID"), rs.getInt("Amount")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
         }
         return list;
     }
 
-
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-
-        /*---------Test Case for getAllProduct() method---------*/
-//        List<Product> list = dao.getAllProduct();
-//        for (Product o : list) {
-//            System.out.println(o);
-//        }
-
-        /*---------Test Case for getHotProduct() method---------*/
-//        System.out.println(dao.getHotProduct());
-
-        /*---------Test Case for getProductBySellID() method---------*/
-//        List<Product> list = dao.getProductBySellID(1);
-//        for (Product product : list) {
-//            System.out.println(product);
-//        }
-
-        /*---------Test Case for countProduct() method---------*/
-//        System.out.println(dao.countProduct());
-
-        /*---------Test Case for pagingProduct() method---------*/
-//        List<Product> list = dao.pagingProduct(1);
-//        for (Product o : list) {
-//            System.out.println(o);
-//        }
-
-        /*---------Test Case for pagingByCategory() method---------*/
-//        List<Product> list = dao.pagingByCategory(1, 1);
-//        for (Product o : list) {
-//            System.out.println(o);
-//        }
-
-        /*---------Test Case for countProductByCategory() method---------*/
-//        System.out.println(dao.countProductByCategory(1));
-
-        /*---------Test Case for getProductDetailByID() method---------*/
-//        System.out.println(dao.getProductDetailByID("1"));
-
-        /*---------Test Case for top3MostSell() method---------*/
-//        List<ProductInManager> list = dao.top3MostSell();
-//        for (ProductInManager productInManager : list) {
-//            System.out.println(productInManager);
-//        }
-
-        /*---------Test Case for top3LeastSell() method---------*/
-//        List<ProductInManager> list = dao.top3LeastSell();
-//        for (ProductInManager productInManager : list) {
-//            System.out.println(productInManager);
-//        }
     }
 
 }
