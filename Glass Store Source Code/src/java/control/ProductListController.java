@@ -8,13 +8,9 @@
 
 package control;
 
-import entity.Account;
 import entity.Category;
-import entity.Information;
-import entity.Notification;
 import entity.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
