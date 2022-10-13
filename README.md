@@ -43,6 +43,12 @@ git push -f
 
 # Coding Convention
 
+Mọi người có thể nhìn convention đầy đủ ở file template thầy gửi trên CMS.
+Comment: JavaWeb_CheckList_v0.2.xlsx
+Coding convention (cach dat ten, function…) check file .pdf (Sample cding standards_Java)
+
+Dưới đây là một vài ví dụ:
+
 - Để chữ thường: Tên file JSP, tên biến,... Ví dụ:
 ```
 login.jsp
