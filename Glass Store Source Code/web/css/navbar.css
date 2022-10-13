@@ -1,9 +1,9 @@
 .navbar {
-  background-color: rgba(0, 0, 0, 0.3);
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
-  z-index: 10000
+    background-color: rgba(0, 0, 0, 0.3);
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 10000
 }
 .navbar-brand{
     max-height: 40px; 
@@ -11,7 +11,39 @@
     padding: 0 0 0 0;
 }
 
-.nav-item{
+.nav-item {
     width: auto;
     padding-left: 10%;
+}
+
+.navbar-nav-container .navbar-nav-popup {
+    display: none;
+    transition: height 4s;
+    top: 40px;
+}
+
+.navbar-nav-container:hover .navbar-nav-popup {
+    display: block;
+    position: absolute;
+    background: rgba(217, 217, 217, 0.7);
+    height: auto;
+    -webkit-animation: popout 0.6s ease;
+    animation: popout 0.6s ease;
+}
+
+@keyframes popout {
+    from {
+        -webkit-transform: scale(0.5);
+    }
+    60% {
+        -webkit-transform: scale(1.01);
+    }
+    to {
+        -webkit-transform: scale(1);
+    }
+}
+.navbar-nav-container{
+    height: 900px;
+    width: 100px;
+    position: absolute;
 }
