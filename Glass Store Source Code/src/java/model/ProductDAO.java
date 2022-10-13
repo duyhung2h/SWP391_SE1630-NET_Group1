@@ -300,22 +300,7 @@ public class ProductDAO extends BaseDAO<Product> {
         return list;
     }
 
-//    public List<Product> searchProductInManager(int SellerID, String name) {
-//        List<Product> list = new ArrayList<>();
-//        String query = "select * from Product\n"
-//                + "where SellerID = ? and ProductName like ?";
-//        try {
-//            ps = connection.prepareStatement(query);
-//            ps.setInt(1, SellerID);
-//            ps.setString(2, "%" + name + "%");
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5)));
-//            }
-//        } catch (Exception e) {
-//        }
-//        return list;
-//    }
+
     //count total product
     public int countProductByCategory(int CategoryID) {
         if (CategoryID == 0) {
