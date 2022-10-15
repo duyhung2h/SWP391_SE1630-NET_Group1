@@ -36,6 +36,34 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>control.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PagingControl</servlet-name>
+        <servlet-class>control.PagingControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaingManagerControl</servlet-name>
+        <servlet-class>control.PaingManagerControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchByAjax</servlet-name>
+        <servlet-class>control.SearchByAjax</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchControl</servlet-name>
+        <servlet-class>control.SearchControl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Compare</servlet-name>
+        <servlet-class>control.Compare</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompareByAjax</servlet-name>
+        <servlet-class>control.CompareByAjax</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompareFinal</servlet-name>
+        <servlet-class>control.CompareFinal</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Index</servlet-name>
         <url-pattern/>
@@ -71,6 +99,34 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PagingControl</servlet-name>
+        <url-pattern>/pagingControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaingManagerControl</servlet-name>
+        <url-pattern>/paingManagerControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchByAjax</servlet-name>
+        <url-pattern>/searchByAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchControl</servlet-name>
+        <url-pattern>/searchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Compare</servlet-name>
+        <url-pattern>/compare</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompareByAjax</servlet-name>
+        <url-pattern>/compareByAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompareFinal</servlet-name>
+        <url-pattern>/compareFinal</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
