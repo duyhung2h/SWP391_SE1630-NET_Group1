@@ -10,7 +10,21 @@ package util;
 
 import java.util.Random;
 
-
+/**
+ * GenerateRandomString.java
+ *
+ * Lớp này có...
+ *
+ * Thực hiện chức năng:
+ *
+ * Các phương thức sẽ trả về một đối tượng của lớp
+ * <code>java.lang.Exception</code> khi có bất cứ lỗi nào xảy ra trong quá trình
+ * truy vấn, cập nhật dữ liệu.
+ * <p>
+ * Bugs: ...	</p>
+ *
+ * @author Admin
+ */
 public class GenerateRandomString {
 
     /**

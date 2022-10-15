@@ -146,8 +146,13 @@
                             <a class="nav-link" href="login" id="linkHover">Login</a>
                         </c:if>
                         <c:if test = "${param.acc != null && param.acc != ''}">
-                            <!--Link to user profile-->
                             <a class="nav-link" href="profile" id="bell"><i class="fas fa-user"></i></i> ${param.acc}</a>
+                            <div class="navbar-nav-container">
+                                <!--Link to user profile-->
+                                <div class="navbar-nav-popup">
+                                    <a class="nav-link" href="logout" id="bell">Logout</a>
+                                </div>
+                            </div>
                         </c:if>
                     </ul>
                 </form>
