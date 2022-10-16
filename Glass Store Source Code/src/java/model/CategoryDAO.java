@@ -9,7 +9,6 @@
 package model;
 
 import entity.Category;
-import entity.Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -62,6 +61,7 @@ public class CategoryDAO extends BaseDAO<Category> {
     }
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         CategoryDAO dao = new CategoryDAO();
 
         /*---------Test Case for getAllCategory() method---------*/
@@ -71,5 +71,8 @@ public class CategoryDAO extends BaseDAO<Category> {
 //        }
         /*---------Test Case for getAllCategory() method---------*/
         //       System.out.println(dao.getCateNameByID(1));        
+=======
+        CategoryDAO dao = new CategoryDAO();  
+>>>>>>> e9a6bb4d5b89c24005915c92fac1239dc1c0026e
     }
 }

@@ -3,12 +3,12 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 02-10-2022      1.0                 AnhLH           First Implement
+ * Oct 16, 2022      1.0                 HungND           First Implement
  */
-
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-public class HomepageController extends HttpServlet {
+public class ProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +32,23 @@ public class HomepageController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("homepage.jsp").forward(request, response);
+        request.setAttribute("screen", "profile");
+
+        // Kiểm tra xem nếu user đã đăng nhập thì redirect đến trang chủ
+        try {
+            Object accTest = request.getSession().getAttribute("acc");
+            if (accTest == null) {
+                response.sendRedirect("/homepage");
+                return;
+            } else {
+                request.setAttribute("acc", accTest);
+            }
+            request.getRequestDispatcher("portal.jsp").forward(request, response);
+            return;
+        } catch (Exception e) {
+            response.sendRedirect("Error.jsp");
+            return;
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

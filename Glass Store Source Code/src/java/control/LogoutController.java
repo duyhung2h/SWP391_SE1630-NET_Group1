@@ -3,22 +3,23 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 02-10-2022      1.0                 AnhLH           First Implement
+ * Oct 11, 2022      1.0                 Admin           First Implement
  */
-
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-public class HomepageController extends HttpServlet {
+public class LogoutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +33,15 @@ public class HomepageController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("homepage.jsp").forward(request, response);
+        try {
+            HttpSession session = request.getSession();
+            session.removeAttribute("acc");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            String[] url = request.getHeader("referer").split("/");
+            response.sendRedirect(url[url.length - 1]);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

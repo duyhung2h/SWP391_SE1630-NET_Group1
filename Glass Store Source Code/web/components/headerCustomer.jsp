@@ -45,92 +45,6 @@
                     <li class="nav-item">
                         <a class="nav-link " href="products" id="linkHover">Products</a>
                     </li>
-
-                    <!--N?u acc khác null -> login r?i -> hi?n th? c? 3 menu d??i-->
-                    <c:if test = "${acc != null}">
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: unset !important;">
-                            <ul class="nav nav-pills mr-auto justify-content-end">           
-                                <li class="nav-item dropdown " id="sup">
-                                    <a onclick="notiRead(${acc.id})" class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ebebf2;">
-                                        <i class="fa fa-bell" id="bell">     
-                                            <span id="unread">${unread}</span>
-                                        </i>
-
-                                    </a>
-
-                                    <ul class="dropdown-menu" id="dropdown">
-                                        <li class="head text-light bg-dark">
-                                            <div class="row">
-                                                <div class="col-lg-12 col-sm-12 col-12">
-                                                    <span>Notifications (most recently)</span>
-                                                    <a onclick="notiRead(${acc.id})" class="float-right text-light" href="#">
-                                                        Mark all as read
-                                                    </a>
-                                                </div>
-                                        </li>
-
-                                        <c:forEach items="${notis}" var="item">
-                                            <c:set var="condition" >${item.status}</c:set>
-                                            <form action="viewInvoiceDetailAdmin" id="${item.orderId}1" style="display:none;">
-                                                <input type="text" value="${item.orderId}" name="id"/>
-    <!--                                                    <input type="hidden" value="${item.status}" name="status"/>-->
-                                                <input type="text" value="${condition}" name="status"/>
-                                            </form>
-                                            <form action="viewOrderDetail" id="${item.orderId}2" style="display:none;">
-                                                <input type="hidden" value="${item.orderId}" name="id"/>
-                                            </form>
-                                            <a 
-                                                <c:if test="${acc.isAdmin == 1}">
-                                                    onclick="formAutoSubmit('${item.orderId}1')"
-                                                </c:if>
-                                                <c:if test="${acc.isAdmin != 1}">
-                                                    onclick="formAutoSubmit('${item.orderId}2')"
-                                                </c:if>
-                                                style="text-decoration: none;cursor: pointer">
-                                                <li class="notification-box" style="cursor: pointer;" >
-                                                    <div class="row" id="noticeContent">
-                                                        <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                                            <img src="image/47734_tai_nghe_corsair_hs35_stereo_blue_0005_1.jpg" class="w-50 rounded-circle">
-                                                        </div>    
-                                                        <div class="col-lg-8 col-sm-8 col-8" >
-                                                            <div>
-                                                                ${item.content}
-                                                            </div>
-                                                            <small class="text-warning">${item.time}</small>
-                                                        </div>    
-                                                    </div>
-                                                </li>
-                                            </a>
-                                        </c:forEach>
-
-                                        <li class="footer bg-dark text-center">
-                                            <a href="viewAllNotifications" class="text-light">View All (${numberOfNotifications})</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <!--Ki?m tra xem có ph?i ng??i bán ko: isSell = 1-->
-                        <c:if test="${acc.isSell == 1}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="dashBoard" id="linkHover">Dash Board</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="manager" id="linkHover">Manager Product</a>
-                            </li> 
-                        </c:if>
-                        <!--Ki?m tra xem có ph?i admin ko: isAdmin == 1-->
-                        <c:if test="${acc.isAdmin == 1}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="account-management" id="linkHover">Manager Account</a>
-                            </li> 
-                        </c:if>
-                        <li class="nav-item">
-                            <!--S?a: khi ?n logout: d?n -> servlet-->
-                            <a class="nav-link" href="logout" id="linkHover">LogOut</a>
-                        </li>
-                    </c:if>
                 </ul>
                 <form class="form-inline my-2 my-lg-0 col-8 justify-content-end" action="products" method="GET">
                     <input class="form-control mr-sm-2 col-5" type="search" placeholder="Search" aria-label="Search..." oninput="searchByName(this)" value="${txtS}" name="txt" id="searchText">
@@ -146,8 +60,14 @@
                             <a class="nav-link" href="login" id="linkHover">Login</a>
                         </c:if>
                         <c:if test = "${param.acc != null && param.acc != ''}">
-                            <!--Link to user profile-->
                             <a class="nav-link" href="profile" id="bell"><i class="fas fa-user"></i></i> ${param.acc}</a>
+                            <div class="navbar-nav-container">
+                                <!--Link to user profile-->
+                                <div class="navbar-nav-popup">
+                                    <a class="nav-link" href="profile" id="bell">Profile</a>
+                                    <a class="nav-link" href="logout" id="bell">Logout</a>
+                                </div>
+                            </div>
                         </c:if>
                     </ul>
                 </form>

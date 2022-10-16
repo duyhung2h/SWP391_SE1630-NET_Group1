@@ -11,10 +11,10 @@
         <form action="signup" id="sign-up-form" method="post">
             <h1 class="h3 my-5 font-weight-normal text-center"> Sign up</h1>
             <p class="text-danger">${mess}</p>
-            <input name="user" id="user" type="text" class="form-control my-4" placeholder="Username" required="" autofocus="" value="${user}">
-            <input name="email" id="email" type="email" class="form-control my-4" placeholder="Email" required autofocus="" value="${email}">
-            <input name="pass" id="pass" type="password" class="form-control my-4" placeholder="Password" required autofocus="" value="${pass}">
-            <input name="repass" id="repass" type="password" class="form-control my-4" placeholder="Repeat Password" required autofocus="" value="${repass}">
+            <input name="user" id="user" type="text" class="form-control my-4" placeholder="Username" required="" autofocus="" value="${user}" onkeypress="return event.charCode !== 32">
+            <input name="email" id="email" type="email" class="form-control my-4" placeholder="Email" required autofocus="" value="${email}" onkeypress="return event.charCode !== 32">
+            <input name="pass" id="pass" type="password" class="form-control my-4" placeholder="Password" required autofocus="" value="${pass}" onkeypress="return event.charCode !== 32">
+            <input name="repass" id="repass" type="password" class="form-control my-4" placeholder="Repeat Password" required autofocus="" value="${repass}" onkeypress="return event.charCode !== 32">
             <div class="form-group">
                 <label class="form-check-label">
                     <input id="check" type="checkbox" required="required"> I accept the 

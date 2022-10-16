@@ -1,31 +1,36 @@
 /*
- * Copyright(C) 2022, GROUP 1 SWP391 SE1630-NET
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 04-10-2022      1.0                 TuanNA           First Implement
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 package control;
-import entity.*;
-import model.*;
+
+import entity.Category;
+import entity.Information;
+import entity.Product;
+import entity.ProductCompare;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.CategoryDAO;
+import model.InforDAO;
+import model.ProductCompareDAO;
+import model.ProductDAO;
 
 /**
  *
- * @author ADMIN
+ * @author dell
  */
-public class AccountManagerController extends HttpServlet {
+public class Compare extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *0
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -33,19 +38,42 @@ public class AccountManagerController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+                response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         try {
-            UserDAO userDAO = new UserDAO();
-            List<Account> listAccount = userDAO.getAllAccounts();
+            //Get data from JSP
+            String id = request.getParameter("id");
 
-            //Set data to JSP
-            request.setAttribute("list", listAccount);
-            request.getRequestDispatcher("accountManager.jsp").forward(request, response);
+            ProductDAO ProductDAO = new ProductDAO();
+            ProductCompareDAO ProductCompareDAO = new ProductCompareDAO();
+            InforDAO InforDAO = new InforDAO();
+
+            Product hot = ProductDAO.getHotProduct(); //Get First Product
+            String cateId = ProductDAO.getCateIdOfProductByID(id);
+            Product favor = ProductDAO.getFavoriteProduct(); //Get Last Product
+            Information infor = InforDAO.getInfor(); //Get Information
+            ProductCompare product = ProductCompareDAO.getProductByID(id); //Get the selected Product infor
+            List products = ProductDAO.getAllProduct();
+            CategoryDAO CategoryDAO = new CategoryDAO();
+            List<Category> listC = CategoryDAO.getAllCategory(); //Get List Category
+
+            //Seding data to jsp page
+            request.setAttribute("product", product);
+            request.setAttribute("products", products);
+            request.setAttribute("cateId", cateId);
+            request.setAttribute("hot", hot);
+            request.setAttribute("favor", favor);
+            request.setAttribute("infor", infor);
+            request.setAttribute("allCategory", listC);
+
+            /*Sending first product's detail and ask user to 
+        choose the other product to compare with
+             */
+            request.getRequestDispatcher("Compare.jsp").forward(request, response);
         } catch (Exception e) {
             response.sendRedirect("Error.jsp");
         }
-        //Get data from DAO
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

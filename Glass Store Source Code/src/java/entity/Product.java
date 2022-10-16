@@ -72,4 +72,13 @@ public class Product {
         return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", imageLink=" + imageLink + '}';
     }
     
+       public String getPriceWithDot() {
+        String priceDot = "" + price;
+        int i = priceDot.length() - 3;
+        while (i > 0) {
+            priceDot = priceDot.substring(0, i) + "." + priceDot.substring(i, priceDot.length());
+            i -= 3;
+        }
+        return priceDot;
+    }
 }

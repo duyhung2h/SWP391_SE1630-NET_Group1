@@ -11,8 +11,8 @@
         <br><br><br><br>
         <h1 class="h3 mb-3 font-weight-normal text-center"> Sign in</h1>
         <p class="text-danger">${mess}</p>
-        <input name="user" value="${username}" type="text" id="user" class="form-control" placeholder="Username" autofocus="">
-        <input name="pass" value="${password}" type="password" id="password" class="form-control" placeholder="Password" >
+        <input name="user" value="${username}" type="text" id="user" class="form-control" placeholder="Username" onkeypress="return event.charCode !== 32" autofocus="">
+        <input name="pass" value="${password}" type="password" id="password" class="form-control" placeholder="Password" onkeypress="return event.charCode !== 32" >
 
         <div class="form-group">
 
