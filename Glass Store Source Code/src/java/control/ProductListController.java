@@ -41,21 +41,12 @@ public class ProductListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-           
-        response.setContentType("text/html;charset=UTF-8");
+       response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         try {
             //Call to DAOs
-=======
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
->>>>>>> 36d7dfd0fc2827c8f1d547dcd83ebb85dc571853
 
-        //Call to DAOs
-        try {
             HttpSession session = request.getSession();
-<<<<<<< HEAD
             if (session.getAttribute("acc") == null) {
                 ProductDAO ProductDAO = new ProductDAO();
                 InforDAO InforDAO = new InforDAO();
@@ -65,52 +56,38 @@ public class ProductListController extends HttpServlet {
                 Product hot = ProductDAO.getHotProduct(); //Get First Product
                 Product favor = ProductDAO.getFavoriteProduct(); //Get Last Product
                 Information infor = InforDAO.getInfor(); //Get Information
-=======
-            ProductDAO ProductDAO = new ProductDAO();
-            // InforDAO InforDAO = new InforDAO();
-            CategoryDAO CategoryDAO = new CategoryDAO();
 
-            List<Category> listC = CategoryDAO.getAllCategory(); //Get List Category
-            Product hot = ProductDAO.getHotProduct(); //Get First Product
-            Product favor = ProductDAO.getFavoriteProduct(); //Get Last Product
->>>>>>> 36d7dfd0fc2827c8f1d547dcd83ebb85dc571853
 
-            //Paging By CategoryID
-            String CategoryID = request.getParameter("CategoryID");
-            if (CategoryID == null) { //On Load: User hasn't choosen Category
-                CategoryID = "0";
-            }
-            //Set Category ID back on JSP
-            request.setAttribute("CategoryID", CategoryID);
+                //Paging By CategoryID
+                String CategoryID = request.getParameter("CategoryID");
+                if (CategoryID == null) { //On Load: User hasn't choosen Category
+                    CategoryID = "0";
+                }
+                //Set Category ID back on JSP
+                request.setAttribute("CategoryID", CategoryID);
 
-            int CID = Integer.parseInt(CategoryID);
+                int CID = Integer.parseInt(CategoryID);
 
-            //Get Page number from JSP
-            String indexPage = request.getParameter("index");
-            if (indexPage == null) {
-                //On load: Page 1
-                indexPage = "1";
-            }
+                //Get Page number from JSP
+                String indexPage = request.getParameter("index");
+                if (indexPage == null) {
+                    //On load: Page 1
+                    indexPage = "1";
+                }
 
-            int index = Integer.parseInt(indexPage);
+                int index = Integer.parseInt(indexPage);
 
-            //Count number of Product According to the Category -> Number of Pages
-            int count = ProductDAO.countProductByCategory(CID);
-            int endPage = count / 6;
-            if (count % 6 != 0) {
-                //If the number of Product isn't divided by 3 -> Need 1 more Page
-                endPage++;
-            }
+                //Count number of Product According to the Category -> Number of Pages
+                int count = ProductDAO.countProductByCategory(CID);
+                int endPage = count / 6;
+                if (count % 6 != 0) {
+                    //If the number of Product isn't divided by 3 -> Need 1 more Page
+                    endPage++;
+                }
 
-            //List of Product to Display after Paging by Category ID
-            List<Product> list = ProductDAO.pagingByCategory(index, CID);
+                //List of Product to Display after Paging by Category ID
+                List<Product> list = ProductDAO.pagingByCategory(index, CID);
 
-            //Set Data to JSP
-            request.setAttribute("allCategory", listC);
-            request.setAttribute("hot", hot);
-            request.setAttribute("favor", favor);
-
-<<<<<<< HEAD
                 //Set Data to JSP
                 request.setAttribute("allCategory", listC);
                 request.setAttribute("hot", hot);
@@ -124,7 +101,7 @@ public class ProductListController extends HttpServlet {
                 request.setAttribute("CateID", CID);
                 request.setAttribute("CateName", CategoryDAO.getCateNameByID(CID));
 
-                request.getRequestDispatcher("productList.jsp").forward(request, response);
+                request.getRequestDispatcher("ProductList.jsp").forward(request, response);
             } else {
                 ProductDAO ProductDAO = new ProductDAO();
                 InforDAO InforDAO = new InforDAO();
@@ -188,26 +165,11 @@ public class ProductListController extends HttpServlet {
                 request.setAttribute("acc",user);
                 request.setAttribute("CateName", CategoryDAO.getCateNameByID(CID));
 
-                request.getRequestDispatcher("productList.jsp").forward(request, response);
+                request.getRequestDispatcher("ProductList.jsp").forward(request, response);
             }
         } catch (Exception e) {
             response.sendRedirect("Error.jsp");
         }
-
-=======
-            request.setAttribute("listP", list); //List Product
-            request.setAttribute("end", endPage);
-            request.setAttribute("tag", index); //Page number
-            request.setAttribute("count", count);
-            request.setAttribute("CateID", CID);
-            request.setAttribute("CateName", CategoryDAO.getCateNameByID(CID));
-
-            request.getRequestDispatcher("productList.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-        }
->>>>>>> 36d7dfd0fc2827c8f1d547dcd83ebb85dc571853
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
