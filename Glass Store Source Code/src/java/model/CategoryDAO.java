@@ -38,7 +38,7 @@ public class CategoryDAO extends BaseDAO<Category> {
         return list;
     }
 
-        /**
+    /**
      * Select a specified category by its ID, used for categorizing products in homepage
      * @param id
      * @return 
@@ -59,6 +59,15 @@ public class CategoryDAO extends BaseDAO<Category> {
     }
     
     public static void main(String[] args) {
-        CategoryDAO dao = new CategoryDAO();  
+        CategoryDAO dao = new CategoryDAO();
+        
+        /*---------Test Case for getAllCategory() method---------*/
+//        List<Category> list = dao.getAllCategory();
+//        for (Category category : list) {
+//            System.out.println(category);
+//        }
+        
+        /*---------Test Case for getAllCategory() method---------*/
+        System.out.println(dao.getCateNameByID(1));        
     }
 }

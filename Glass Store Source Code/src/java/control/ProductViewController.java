@@ -1,16 +1,12 @@
 /*
- * Copyright(C) 2022, GROUP 1 SWP391 SE1630-NET
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 04-10-2022      1.0                 TuanNA           First Implement
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 package control;
-import entity.*;
-import model.*;
+
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author LHA_21MR
  */
-public class AccountManagerController extends HttpServlet {
+public class ProductViewController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *0
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -34,18 +30,8 @@ public class AccountManagerController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        try {
-            UserDAO userDAO = new UserDAO();
-            List<Account> listAccount = userDAO.getAllAccounts();
 
-            //Set data to JSP
-            request.setAttribute("list", listAccount);
-            request.getRequestDispatcher("accountManager.jsp").forward(request, response);
-        } catch (Exception e) {
-            response.sendRedirect("Error.jsp");
-        }
-        //Get data from DAO
+        request.getRequestDispatcher("productView.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
