@@ -53,7 +53,7 @@
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="card" id="product"> <!--class="card"-->
                                 <!--Product's image-->
-                                <a href="detail?ProductID=${o.id}" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
+                                <a href="product-view?ProductID=${o.id}" title="View Product"><img class="card-img-top" src="images/chup-hinh-mat-kinh.jpg" alt="Card image cap"></a>
                                 <div class="card-body">
                                     <!--Product's name. Onlick: Product's Detail-->
                                     <h4 class="card-title show_txt"><a href="detail?ProductID=${o.id}" title="View Product">${o.name}</a></h4>

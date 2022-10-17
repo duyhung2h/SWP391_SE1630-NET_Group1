@@ -15,8 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * The class contains method which read the user's data and display informations. Users can also change their passwords, if they so choose.
+ * 
+ * The method will
+ * throw an object of <code>java.lang.Exception</code> class if there is any
+ * error occurring when finding, inserting, or updating data
+ * <p>
+ * Bugs: 
  *
- * @author Admin
+ * @author Hung
  */
 public class ProfileController extends HttpServlet {
 

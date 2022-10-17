@@ -3,7 +3,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * Oct 11, 2022      1.0                 Admin           First Implement
+ * Oct 11, 2022      1.0                 HungND           First Implement
  */
 package control;
 
@@ -16,8 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * The class contains method which log out the user from the system.
+ * 
+ * The method will
+ * throw an object of <code>java.lang.Exception</code> class if there is any
+ * error occurring when finding, inserting, or updating data
+ * <p>
+ * Bugs: 
  *
- * @author Admin
+ * @author Hung
  */
 public class LogoutController extends HttpServlet {
 

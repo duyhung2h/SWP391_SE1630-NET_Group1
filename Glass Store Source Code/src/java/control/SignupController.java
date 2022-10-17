@@ -17,9 +17,18 @@ import javax.servlet.http.HttpSession;
 import model.UserDAO;
 import util.GenerateRandomString;
 
+
 /**
+ * The class contains method which register a new account to the server once all relevant input fields are filled, and automatically log users in.
+ * If there shall be any errors, or inputted users credentials already existed, it will return an error message.
+ * 
+ * The method will
+ * throw an object of <code>java.lang.Exception</code> class if there is any
+ * error occurring when finding, inserting, or updating data
+ * <p>
+ * Bugs: 
  *
- * @author Admin
+ * @author Hung
  */
 public class SignupController extends HttpServlet {
 

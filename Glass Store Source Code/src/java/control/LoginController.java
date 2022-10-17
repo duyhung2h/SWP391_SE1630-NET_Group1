@@ -18,8 +18,16 @@ import javax.servlet.http.HttpSession;
 import model.UserDAO;
 
 /**
+ * The class contains method which handles with fetching inputted username, and password data, and return a session with user credentials if account is matched,
+ * and log the user into the system. If the credentials are incorrect, it will return an error message.
+ * 
+ * The method will
+ * throw an object of <code>java.lang.Exception</code> class if there is any
+ * error occurring when finding, inserting, or updating data
+ * <p>
+ * Bugs: 
  *
- * @author Admin
+ * @author Hung
  */
 public class LoginController extends HttpServlet {
 

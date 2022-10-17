@@ -25,8 +25,16 @@ import model.NotificationDAO;
 import model.ProductDAO;
 
 /**
+ * The class contains method which handles with fetching products from database, and fetching search queries, to return a list of products to display 
+ * in the front end.
+ * 
+ * The method will
+ * throw an object of <code>java.lang.Exception</code> class if there is any
+ * error occurring when finding, inserting, or updating data
+ * <p>
+ * Bugs: 
  *
- * @author dell
+ * @author Minh
  */
 public class ProductListController extends HttpServlet {
 
