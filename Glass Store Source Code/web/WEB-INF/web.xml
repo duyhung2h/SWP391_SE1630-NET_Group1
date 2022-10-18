@@ -2,285 +2,293 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>
-			Index
-		</servlet-name>
+            Index
+        </servlet-name>
         <servlet-class>
-			control.LoginController
-		</servlet-class>
+            control.LoginController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			LoginController
-		</servlet-name>
+            LoginController
+        </servlet-name>
         <servlet-class>
-			control.LoginController
-		</servlet-class>
+            control.LoginController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			SignupController
-		</servlet-name>
+            SignupController
+        </servlet-name>
         <servlet-class>
-			control.SignupController
-		</servlet-class>
+            control.SignupController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			DashBoardController
-		</servlet-name>
+            DashBoardController
+        </servlet-name>
         <servlet-class>
-			control.DashBoardController
-		</servlet-class>
+            control.DashBoardController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			ProductListController
-		</servlet-name>
+            ProductListController
+        </servlet-name>
         <servlet-class>
-			control.ProductListController
-		</servlet-class>
+            control.ProductListController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			HomepageController
-		</servlet-name>
+            HomepageController
+        </servlet-name>
         <servlet-class>
-			control.HomepageController
-		</servlet-class>
+            control.HomepageController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			CartController
-		</servlet-name>
+            CartController
+        </servlet-name>
         <servlet-class>
-			control.CartController
-		</servlet-class>
+            control.CartController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			AccountManagerController
-		</servlet-name>
+            AccountManagerController
+        </servlet-name>
         <servlet-class>
-			control.AccountManagerController
-		</servlet-class>
+            control.AccountManagerController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			LogoutController
-		</servlet-name>
+            LogoutController
+        </servlet-name>
         <servlet-class>
-			control.LogoutController
-		</servlet-class>
+            control.LogoutController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			ProfileController
-		</servlet-name>
+            ProfileController
+        </servlet-name>
         <servlet-class>
-			control.ProfileController
-		</servlet-class>
+            control.ProfileController
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			PagingControl
-		</servlet-name>
+            PagingControl
+        </servlet-name>
         <servlet-class>
-			control.PagingControl
-		</servlet-class>
+            control.PagingControl
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			PaingManagerControl
-		</servlet-name>
+            PaingManagerControl
+        </servlet-name>
         <servlet-class>
-			control.PaingManagerControl
-		</servlet-class>
+            control.PaingManagerControl
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			SearchByAjax
-		</servlet-name>
+            SearchByAjax
+        </servlet-name>
         <servlet-class>
-			control.SearchByAjax
-		</servlet-class>
+            control.SearchByAjax
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			SearchControl
-		</servlet-name>
+            SearchControl
+        </servlet-name>
         <servlet-class>
-			control.SearchControl
-		</servlet-class>
+            control.SearchControl
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			Compare
-		</servlet-name>
+            Compare
+        </servlet-name>
         <servlet-class>
-			control.Compare
-		</servlet-class>
+            control.Compare
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			CompareByAjax
-		</servlet-name>
+            CompareByAjax
+        </servlet-name>
         <servlet-class>
-			control.CompareByAjax
-		</servlet-class>
+            control.CompareByAjax
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>
-			CompareFinal
-		</servlet-name>
+            CompareFinal
+        </servlet-name>
         <servlet-class>
-			control.CompareFinal
-		</servlet-class>
+            control.CompareFinal
+        </servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProductViewController</servlet-name>
         <servlet-class>control.ProductViewController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerListController</servlet-name>
+        <servlet-class>control.CustomerListController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>
-			Index
-		</servlet-name>
+            Index
+        </servlet-name>
         <url-pattern/>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			LoginController
-		</servlet-name>
+            LoginController
+        </servlet-name>
         <url-pattern>
-			/login
-		</url-pattern>
+            /login
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			SignupController
-		</servlet-name>
+            SignupController
+        </servlet-name>
         <url-pattern>
-			/signup
-		</url-pattern>
+            /signup
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			DashBoardController
-		</servlet-name>
+            DashBoardController
+        </servlet-name>
         <url-pattern>
-			/dashboard
-		</url-pattern>
+            /dashboard
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			ProductListController
-		</servlet-name>
+            ProductListController
+        </servlet-name>
         <url-pattern>
-			/products
-		</url-pattern>
+            /products
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			HomepageController
-		</servlet-name>
+            HomepageController
+        </servlet-name>
         <url-pattern>
-			/homepage
-		</url-pattern>
+            /homepage
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			CartController
-		</servlet-name>
+            CartController
+        </servlet-name>
         <url-pattern>
-			/cart
-		</url-pattern>
+            /cart
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			AccountManagerController
-		</servlet-name>
+            AccountManagerController
+        </servlet-name>
         <url-pattern>
-			/account-management
-		</url-pattern>
+            /account-management
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			LogoutController
-		</servlet-name>
+            LogoutController
+        </servlet-name>
         <url-pattern>
-			/logout
-		</url-pattern>
+            /logout
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			ProfileController
-		</servlet-name>
+            ProfileController
+        </servlet-name>
         <url-pattern>
-			/profile
-		</url-pattern>
+            /profile
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			PagingControl
-		</servlet-name>
+            PagingControl
+        </servlet-name>
         <url-pattern>
-			/pagingControl
-		</url-pattern>
+            /pagingControl
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			PaingManagerControl
-		</servlet-name>
+            PaingManagerControl
+        </servlet-name>
         <url-pattern>
-			/paingManagerControl
-		</url-pattern>
+            /paingManagerControl
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			SearchByAjax
-		</servlet-name>
+            SearchByAjax
+        </servlet-name>
         <url-pattern>
-			/searchByAjax
-		</url-pattern>
+            /searchByAjax
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			SearchControl
-		</servlet-name>
+            SearchControl
+        </servlet-name>
         <url-pattern>
-			/searchController
-		</url-pattern>
+            /searchController
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			Compare
-		</servlet-name>
+            Compare
+        </servlet-name>
         <url-pattern>
-			/compare
-		</url-pattern>
+            /compare
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			CompareByAjax
-		</servlet-name>
+            CompareByAjax
+        </servlet-name>
         <url-pattern>
-			/compareByAjax
-		</url-pattern>
+            /compareByAjax
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>
-			CompareFinal
-		</servlet-name>
+            CompareFinal
+        </servlet-name>
         <url-pattern>
-			/compareFinal
-		</url-pattern>
+            /compareFinal
+        </url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductViewController</servlet-name>
         <url-pattern>/product-view</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerListController</servlet-name>
+        <url-pattern>/customer-list</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
-			30
-		</session-timeout>
+            30
+        </session-timeout>
     </session-config>
 </web-app>
