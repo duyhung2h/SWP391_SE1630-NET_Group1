@@ -51,5 +51,22 @@
                 </button>
             </div>
         </form>
+        <form class="fixed-bottom position-absolute my-3" style="bottom:0" 
+              <c:choose>
+                  <c:when test="${acc.isSell == 1}">
+                      action="signup"
+                  </c:when>
+                  <c:when test="${acc.isAdmin == 1}">
+                      Admin
+                  </c:when>
+                  <c:otherwise>
+                      Customer
+                  </c:otherwise>
+              </c:choose>
+              id="sign-up-form" method="post">
+            <button id="btn-signup" type="submit" value="login" name="buttonType">
+                <a id="cancel_signup secondary-text-color"><i class="fas fa-angle-left"></i> Back</a>
+            </button>
+        </form>
     </div>
 </body>
