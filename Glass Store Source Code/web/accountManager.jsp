@@ -49,10 +49,20 @@
                                 <button onclick="search();" class="search_icon"><i class="fas fa-search"></i></button>
                             </div>
                         </div>
+                        <!--Phan quyen: User management cho admin | customer management cho seller-->
                         <div class="row">
                             <div class="table-responsive">
                                 <div class="table-wrapper">
-                                    <h2 style="font-family: Brush Script MT; text-align: center; font-size: 60px">Account manager</h2>
+                                    <h2 style="font-family: Brush Script MT; text-align: center; font-size: 60px">
+                                        <c:choose>
+                                            <c:when test="${acc.isSell == 1}">
+                                                Customer management
+                                            </c:when>
+                                            <c:when test="${acc.isAdmin == 1}">
+                                                Account management
+                                            </c:when>
+                                        </c:choose>
+                                    </h2>
                                     <br>
                                     <table class="table table-striped table-hover">
                                         <thead>

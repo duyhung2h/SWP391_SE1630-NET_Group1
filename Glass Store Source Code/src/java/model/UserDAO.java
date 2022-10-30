@@ -122,6 +122,29 @@ public class UserDAO extends BaseDAO<Account> {
         return list;
     }
 
+    /**
+     * Get all customer account from database
+     *
+     * @return the list of account from the database
+     */
+    public List<Account> getAllCustomerAccounts() {
+        List<Account> list = new ArrayList<>();
+        String query = "SELECT * FROM Users WHERE isAdmin = 0 AND isSeller = 0";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Account(rs.getInt(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getInt(6),
+                        rs.getInt(7), rs.getInt(8)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public List<Integer> getSellerIdOfAnOrder(int orderId) {
         List<Integer> list = new ArrayList<>();
         String query = "SELECT u.userid from Users u INNER JOIN Product p\n"
