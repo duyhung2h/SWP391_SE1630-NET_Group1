@@ -8,6 +8,7 @@ package model;
 import entity.Information;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import model.BaseDAO;
 
 /**
@@ -23,7 +24,7 @@ public class InforDAO extends BaseDAO<Information>{
      * 
      * @return information of the administrator's place (There's only one)
      */
-    public Information getInfor() {
+    public Information getInfor() throws SQLException {
         String query = "SELECT * FROM Information";
         try {
             ps = connection.prepareStatement(query);
@@ -36,11 +37,14 @@ public class InforDAO extends BaseDAO<Information>{
                         rs.getString(5));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return null;
         }
-        return null;
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         InforDAO dao = new InforDAO();
         
         /*---------Test Case for getInfor() method---------*/

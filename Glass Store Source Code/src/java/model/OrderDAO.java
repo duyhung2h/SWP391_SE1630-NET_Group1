@@ -5,7 +5,6 @@
  * DATE            Version             AUTHOR           DESCRIPTION
  * 01-10-2022      1.0                 AnhLH           First Implement
  */
-
 package model;
 
 import entity.Order;
@@ -30,7 +29,7 @@ public class OrderDAO extends BaseDAO<Order> {
      *
      * @return list order
      */
-    public List<Order> getAllOrder() {
+    public List<Order> getAllOrder() throws SQLException {
         List<Order> list = new ArrayList<>();
         String query = "SELECT o.ID,o.USERID,o.TotalPrice, o.Note, os.Name, o.Daybuy\n"
                 + "FROM Orders o INNER JOIN Order_Status os\n"
@@ -46,9 +45,11 @@ public class OrderDAO extends BaseDAO<Order> {
                         rs.getString("Note"), rs.getString("Name"), rs.getString("Daybuy")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return list;
         }
-
-        return list;
     }
 
     /**
@@ -60,7 +61,7 @@ public class OrderDAO extends BaseDAO<Order> {
      * @param status
      * @param date
      */
-    public void add(int userID, double totalPrice, String note, int status, String date) {
+    public void add(int userID, double totalPrice, String note, int status, String date) throws SQLException {
         String query = "INSERT INTO Orders VALUES (?, ?, ?, ?,?);";
         try {
 
@@ -73,17 +74,20 @@ public class OrderDAO extends BaseDAO<Order> {
             ps.setString(5, date);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
     /**
      * adding a new order to database, return the order Id
      *
-     * @param order    order to add
+     * @param order order to add
      * @param statusId status id of the order to add
      * @return id of the order to add
      */
-    public int addOrder(Order order, int statusId) {
+    public int addOrder(Order order, int statusId) throws SQLException {
 
         String query = "INSERT INTO Orders VALUES(?, ?, ?, ?, ?)";
         int check = 0;
@@ -101,11 +105,12 @@ public class OrderDAO extends BaseDAO<Order> {
                 rs.next();
                 return rs.getInt(1);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return 0;
         }
-        return 0;
     }
 
     /**
@@ -131,7 +136,7 @@ public class OrderDAO extends BaseDAO<Order> {
      *
      * @param id: id of the order to be changed
      */
-    public void delivering(int id) {
+    public void delivering(int id) throws SQLException {
         String query = "UPDATE Orders\n"
                 + "SET Status = 3\n"
                 + "WHERE ID = ?";
@@ -141,6 +146,9 @@ public class OrderDAO extends BaseDAO<Order> {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
@@ -149,7 +157,7 @@ public class OrderDAO extends BaseDAO<Order> {
      *
      * @param id: id of the order to be changed
      */
-    public void canceled(int id) {
+    public void canceled(int id) throws SQLException {
         String query = "UPDATE Orders\n"
                 + "SET Status = 4\n"
                 + "WHERE ID = ?";
@@ -159,6 +167,9 @@ public class OrderDAO extends BaseDAO<Order> {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
@@ -167,7 +178,7 @@ public class OrderDAO extends BaseDAO<Order> {
      *
      * @param id: id of the order to be changed
      */
-    public void finished(int id) {
+    public void finished(int id) throws SQLException {
         String query = "UPDATE Orders\n"
                 + "SET Status = 5\n"
                 + "WHERE ID = ?";
@@ -177,6 +188,9 @@ public class OrderDAO extends BaseDAO<Order> {
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
@@ -185,7 +199,7 @@ public class OrderDAO extends BaseDAO<Order> {
      *
      * @return an integer number
      */
-    public int countOrders() {
+    public int countOrders() throws SQLException {
         String query = "SELECT COUNT(*) FROM Orders";
         try {
             ps = connection.prepareStatement(query);
@@ -194,8 +208,11 @@ public class OrderDAO extends BaseDAO<Order> {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return 0;
         }
-        return 0;
     }
 
     /**
@@ -204,7 +221,7 @@ public class OrderDAO extends BaseDAO<Order> {
      * @param orderId
      * @return int status
      */
-    public int getStatusOfAnOrder(int orderId) {
+    public int getStatusOfAnOrder(int orderId) throws SQLException {
         String query = "SELECT status FROM Orders WHERE ID=?";
         try {
             ps = connection.prepareStatement(query);
@@ -214,8 +231,11 @@ public class OrderDAO extends BaseDAO<Order> {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return 0;
         }
-        return 0;
     }
 
     /**
@@ -224,7 +244,7 @@ public class OrderDAO extends BaseDAO<Order> {
      * @param id: the id of the order
      * @return Order
      */
-    public Order getOrderByOrderID(int id) {
+    public Order getOrderByOrderID(int id) throws SQLException {
         String query = "SELECT o.ID,o.UserId,o.TotalPrice, o.Note, o.DayBuy, os.Name \n"
                 + "FROM Orders o INNER JOIN Order_Status os\n"
                 + "ON o.Status = os.ID\n"
@@ -244,8 +264,11 @@ public class OrderDAO extends BaseDAO<Order> {
                         rs.getDate("DayBuy")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return null;
         }
-        return null;
     }
 
     /**
@@ -253,7 +276,7 @@ public class OrderDAO extends BaseDAO<Order> {
      *
      * @return the newest order id
      */
-    public int getNewestOrderID() {
+    public int getNewestOrderID() throws SQLException {
         String query = "SELECT TOP(1) o.id,o.userId,o.totalPrice, o.note, os.name, o.daybuy \n"
                 + "FROM Orders o INNER JOIN Order_Status os\n"
                 + "ON o.Status = os.ID\n"
@@ -273,8 +296,11 @@ public class OrderDAO extends BaseDAO<Order> {
                 return a.getId();
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return 0;
         }
-        return 0;
     }
 
     /**
@@ -283,7 +309,7 @@ public class OrderDAO extends BaseDAO<Order> {
      * @param userId: id of the user
      * @return List Order
      */
-    public List<Order> getOrderByUserID(int userId) {
+    public List<Order> getOrderByUserID(int userId) throws SQLException {
         List<Order> list = new ArrayList<>();
         String query = "SELECT o.ID, o.UserID, "
                 + "o.TotalPrice, o.Note, os.Name, "
@@ -306,9 +332,11 @@ public class OrderDAO extends BaseDAO<Order> {
                         rs.getString("Daybuy")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return list;
         }
-
-        return list;
     }
 
     /**
@@ -317,7 +345,7 @@ public class OrderDAO extends BaseDAO<Order> {
      * @param userId: id of the user
      * @return List Order
      */
-    public List<Order> getCompletedOrderByUserID(int userId) {
+    public List<Order> getCompletedOrderByUserID(int userId) throws SQLException {
         List<Order> list = new ArrayList<>();
         String query = "SELECT o.ID, o.UserID, "
                 + "o.TotalPrice, o.Note, os.Name, "
@@ -342,8 +370,10 @@ public class OrderDAO extends BaseDAO<Order> {
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            connection.close();
+            return null;
         }
-        return null;
     }
 
     // public List<Order> getOrderBySellerID(int sellerId) {
@@ -379,7 +409,7 @@ public class OrderDAO extends BaseDAO<Order> {
      *
      * @param id: id of the order
      */
-    public void delete(int id) {
+    public void delete(int id) throws SQLException {
         String query = "DELETE FROM Order_detail WHERE Order_ID = ?\n"
                 + "DELETE FROM Orders WHERE ID = ?";
         try {
@@ -390,10 +420,13 @@ public class OrderDAO extends BaseDAO<Order> {
             // Execute: No Result table -> No RS, only executeUpdate execute
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
-    public List<Order> getRecentOrder() {
+    public List<Order> getRecentOrder() throws SQLException {
         List<Order> list = new ArrayList<>();
         String query = "declare @format varchar(100) = 'yyyy/MM/dd'\n"
                 + "SELECT COUNT(*) as Amount, format(DayBuy,@format) as OrderDate\n"
@@ -414,12 +447,14 @@ public class OrderDAO extends BaseDAO<Order> {
                 list.add(o);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return list;
         }
-
-        return list;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         OrderDAO orderDAO = new OrderDAO();
         List<Order> list = orderDAO.getRecentOrder();
         for (Order order : list) {

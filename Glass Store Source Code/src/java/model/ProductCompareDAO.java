@@ -9,6 +9,7 @@ import entity.Product;
 import entity.ProductCompare;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -20,7 +21,7 @@ public class ProductCompareDAO extends BaseDAO<ProductCompare> {
     ResultSet rs = null; //Get the results returned
     
     
-    public ProductCompare getProductByID(String id) { //Must be int type because when saving to Session, it is still int
+    public ProductCompare getProductByID(String id) throws SQLException { //Must be int type because when saving to Session, it is still int
         String query = "SELECT * FROM Product WHERE ProductID = ?";
         try {
             ps = connection.prepareStatement(query);
@@ -38,8 +39,11 @@ public class ProductCompareDAO extends BaseDAO<ProductCompare> {
                 ));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return null;
         }
-        return null;
     }
 
 }

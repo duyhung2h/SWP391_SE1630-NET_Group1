@@ -10,6 +10,7 @@ package model;
 import entity.Notification;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,10 +29,10 @@ public class NotificationDAO extends BaseDAO<Notification> {
      * Adding a notification to a particular user by their ID that their order
      * has been approved
      *
-     * @param userID:  the user's ID
+     * @param userID: the user's ID
      * @param orderId: the order which related to the notification
      */
-    public void approveOrderAdminNoti(int userID, int orderId) {
+    public void approveOrderAdminNoti(int userID, int orderId) throws SQLException {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH:mm");
@@ -50,9 +51,9 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
             ps.executeUpdate();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         } finally {
-
+            connection.close();
         }
     }
 
@@ -60,10 +61,10 @@ public class NotificationDAO extends BaseDAO<Notification> {
      * send a notification to admin only, that the customer with userId has
      * received their order successfully
      *
-     * @param userID:  id of the customer
+     * @param userID: id of the customer
      * @param orderId: id of the order of the customer
      */
-    public void finishOrderUserNoti(int userID, int orderId) {
+    public void finishOrderUserNoti(int userID, int orderId) throws SQLException {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH:mm");
@@ -83,6 +84,9 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
@@ -90,10 +94,10 @@ public class NotificationDAO extends BaseDAO<Notification> {
      * send a notification to the customer with specified id that their order
      * has been packaged and now being delivered
      *
-     * @param userID:  customer id
+     * @param userID: customer id
      * @param orderId: their order id
      */
-    public void deliverOrderAdminNoti(int userID, int orderId) {
+    public void deliverOrderAdminNoti(int userID, int orderId) throws SQLException {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH:mm");
@@ -112,13 +116,16 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
     /**
      * Inform to the seller and admin that the order has been paid successfully!
      *
-     * @param userId         id of the buyer
+     * @param userId id of the buyer
      * @param orderId
      * @param adminSellerId: id of admin and the seller of the product
      * @throws Exception
@@ -151,16 +158,16 @@ public class NotificationDAO extends BaseDAO<Notification> {
                 ps.execute(); // the INSERT happens here
             }
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         } finally {
-
+            connection.close();
         }
     }
 
     /**
      * Inform customer through notification about their order status
      *
-     * @param userId   id of customer
+     * @param userId id of customer
      * @param orderId
      * @param sellerId id of the seller of the product
      * @throws Exception
@@ -194,17 +201,18 @@ public class NotificationDAO extends BaseDAO<Notification> {
                 ps.execute(); // the INSERT happens here
             }
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         } finally {
+            connection.close();
         }
     }
 
     /**
      * Inform to the seller that an order has newly been made
      *
-     * @param userId  id of the buyer
+     * @param userId id of the buyer
      * @param orderId
-     * 
+     *
      * @throws Exception
      */
     public void userBuyNotiAdmin(int userId, int orderId)
@@ -235,18 +243,19 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps.execute(); // the INSERT happens here
 
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         } finally {
+            connection.close();
         }
     }
 
     /**
      * Adding a notification to user by admin that their order has been canceled
      *
-     * @param userID:  the user's ID
+     * @param userID: the user's ID
      * @param orderId: the order which related to the notification
      */
-    public void cancelOrderNoti(int userID, int orderId) {
+    public void cancelOrderNoti(int userID, int orderId) throws SQLException {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("HH:mm");
@@ -264,6 +273,9 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps.setString(5, dtf.format(now) + " at " + dtf1.format(now));
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
@@ -273,7 +285,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
      * @param userId: id of the user
      * @return list notifications
      */
-    public List<Notification> getTop5NotificationsByUserID(int userId) {
+    public List<Notification> getTop5NotificationsByUserID(int userId) throws SQLException {
         List<Notification> list = new ArrayList<>();
         String query = " SELECT TOP 5 * FROM Notifications "
                 + "WHERE userID=? ORDER BY id DESC";
@@ -292,9 +304,11 @@ public class NotificationDAO extends BaseDAO<Notification> {
                         rs.getString("Time")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return list;
         }
-
-        return list;
     }
 
     /**
@@ -303,7 +317,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
      * @param userId: id of the user
      * @return list notifications
      */
-    public List<Notification> getAllNotificationsByUserID(int userId) {
+    public List<Notification> getAllNotificationsByUserID(int userId) throws SQLException {
         List<Notification> list = new ArrayList<>();
         String query = " SELECT * FROM Notifications "
                 + "WHERE userID=? ORDER BY id DESC";
@@ -322,9 +336,11 @@ public class NotificationDAO extends BaseDAO<Notification> {
                         rs.getString("Time")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return list;
         }
-
-        return list;
     }
 
     /**
@@ -333,7 +349,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
      * @param userId: id of the user
      * @return list notifications
      */
-    public List<Notification> getUnreadNotificationsByUserID(int userId) {
+    public List<Notification> getUnreadNotificationsByUserID(int userId) throws SQLException {
         List<Notification> list = new ArrayList<>();
         String query = "SELECT * FROM Notifications WHERE userID=? and "
                 + "Status ='unread'"
@@ -353,9 +369,11 @@ public class NotificationDAO extends BaseDAO<Notification> {
                         rs.getString("Time")));
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
+            return list;
         }
-
-        return list;
     }
 
     /**
@@ -363,7 +381,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
      *
      * @param userId
      */
-    public void read(int userId) {
+    public void read(int userId) throws SQLException {
         String query = "UPDATE Notifications\n"
                 + "SET Status = 'read'\n"
                 + "WHERE userID = ?";
@@ -373,10 +391,13 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps.setInt(1, userId);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
-    public void readOneNoti(int userId, int orderId) {
+    public void readOneNoti(int userId, int orderId) throws SQLException {
         String query = "UPDATE Notifications\n"
                 + "SET Status = 'read'\n"
                 + "WHERE userID = ? AND orderID=?";
@@ -387,6 +408,9 @@ public class NotificationDAO extends BaseDAO<Notification> {
             ps.setInt(2, orderId);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
@@ -395,7 +419,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
      *
      * @return an integer number
      */
-    public int countUnreadNotifications(int userId) {
+    public int countUnreadNotifications(int userId) throws SQLException {
         String query = "SELECT COUNT(*) FROM Notifications WHERE userId=? "
                 + "and Status = 'unread'";
         try {
@@ -406,6 +430,9 @@ public class NotificationDAO extends BaseDAO<Notification> {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
         return 0;
     }
@@ -415,7 +442,7 @@ public class NotificationDAO extends BaseDAO<Notification> {
      *
      * @return an integer number
      */
-    public int countNotifications(int userId) {
+    public int countNotifications(int userId) throws SQLException {
         String query = "SELECT COUNT(*) FROM Notifications WHERE userId=? ";
         try {
             ps = connection.prepareStatement(query);
@@ -425,6 +452,9 @@ public class NotificationDAO extends BaseDAO<Notification> {
                 return rs.getInt(1);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
         return 0;
     }
@@ -458,7 +488,10 @@ public class NotificationDAO extends BaseDAO<Notification> {
 
                 ps.execute(); // the INSERT happens here
             }
-        } catch (Exception se) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 
@@ -491,7 +524,10 @@ public class NotificationDAO extends BaseDAO<Notification> {
 
                 ps.execute(); // the INSERT happens here
             }
-        } catch (Exception se) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            connection.close();
         }
     }
 }
